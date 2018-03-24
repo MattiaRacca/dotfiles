@@ -170,7 +170,6 @@ svnup() {
 }
 
 parse_svn_branch() {
-  # parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (svn::"$1")" }'
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
 }
 
@@ -199,17 +198,6 @@ astyle_package() {
     find -regextype egrep -regex '.*\.[ch](pp)?$' -exec astyle '{}' --style=allman --indent=spaces=2 --pad-oper --unpad-paren --pad-header --convert-tabs \;
 }
 
-#qtcreator() {
-# nohup /home/mracca/Libraries/Qt5.7.0/Tools/QtCreator/bin/qtcreator -stylesheet=/home/mracca/.config/QtProject/qtcreator/qt-creator-wombat-theme/stylesheet.css >/dev/null &
-#}
-
-#qtcreator_bright() {
-# nohup /home/mracca/Libraries/Qt5.7.0/Tools/QtCreator/bin/qtcreator >/dev/null &
-#}
-
-#`pycharm() {
-# nohup /home/mracca/.local/share/umake/ide/pycharm/bin/pycharm.sh >/dev/null &
-# }
 # Enable tab completion
 source ~/.git-completion.bash
 
@@ -221,7 +209,6 @@ bluebold="\[\033[1;34m\]"
 purple="\[\033[0;35m\]"
 reset="\[\033[0m\]"
 
-
 # Change command prompt
 source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -231,19 +218,19 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
 export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
 
-# COB configs
+### Care-O-bot configs
 # export ROBOT=cob4-8
 # export ROBOT_ENV=ipa-apartment
 
-# Set default text editor
+## Set default text editor
 export EDITOR='gedit'
 
-# NAO configs
+## NAO robot configs
 # export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
 # export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
 
-# Source ROS environments 
-# source /opt/ros/indigo/setup.bash
+## Source ROS environments 
+source /opt/ros/kinetic/setup.bash
 # source /home/mracca/care-o-bot_ws/devel/setup.bash
 # source /home/mracca/activelearner_ws/devel/setup.bash
 
@@ -251,6 +238,3 @@ export EDITOR='gedit'
 # localmaster
 # export ROS_IP=192.168.0.3
 # }
-
-# Python shell autocomplete
-# export PYTHONSTARTUP=/home/$USER/.pythonrc
