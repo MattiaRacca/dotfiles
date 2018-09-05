@@ -164,11 +164,6 @@ evince ./*.pdf &
 clear
 }
 
-svnup() {
-  svn up
-  svn log -l 3
-}
-
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
 }
@@ -229,8 +224,10 @@ export EDITOR='gedit'
 # export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
 # export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
 
-## Source ROS environments 
-source /opt/ros/kinetic/setup.bash
+## Source ROS environments
+if [ -f /opt/ros/kinetic/setup.bash ]; then
+    source /opt/ros/kinetic/setup.bash
+fi
 # source /home/mracca/care-o-bot_ws/devel/setup.bash
 # source /home/mracca/activelearner_ws/devel/setup.bash
 
