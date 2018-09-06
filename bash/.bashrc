@@ -154,15 +154,7 @@ function cd
      fi
 }
 
-mkcd() { mkdir -p "$@" && cd $_; }
-
-we()
-{
-nohup gedit ./*.tex ./*.bib >/dev/null &
-nautilus .
-evince ./*.pdf &
-clear
-}
+# Alias for SVN - basically never used
 
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
