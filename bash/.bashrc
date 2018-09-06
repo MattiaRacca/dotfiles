@@ -93,9 +93,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias for TF2
-alias tf2='cd /var/tmp && rosrun tf2_tools view_frames.py && evince frames.pdf &'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -154,20 +151,20 @@ function cd
      fi
 }
 
-mkcd() { mkdir -p "$@" && cd $_; }
+# mkcd() { mkdir -p "$@" && cd $_; }
 
-we()
-{
-nohup gedit ./*.tex ./*.bib >/dev/null &
-nautilus .
-evince ./*.pdf &
-clear
-}
+#we()
+#{
+#nohup gedit ./*.tex ./*.bib >/dev/null &
+#nautilus .
+#evince ./*.pdf &
+#clear
+#}
 
-svnup() {
-  svn up
-  svn log -l 3
-}
+#svnup() {
+#  svn up
+#  svn log -l 3
+#}
 
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
@@ -219,21 +216,23 @@ export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
 export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
 
 ### Care-O-bot configs
-# export ROBOT=cob4-8
-# export ROBOT_ENV=ipa-apartment
+export ROBOT=cob4-8
+export ROBOT_ENV=ipa-apartment
 
 ## Set default text editor
 export EDITOR='gedit'
 
 ## NAO robot configs
-# export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
+export PYTHONPATH=/home/$USER/libraries/naoqi/pynaoqi-python2.7-2.1.2.17-linux64:$PYTHONPATH
 # export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
 
 ## Source ROS environments 
 source /opt/ros/kinetic/setup.bash
-# source /home/mracca/care-o-bot_ws/devel/setup.bash
+# source /home/mracca/cob/devel/setup.bash
 # source /home/mracca/activelearner_ws/devel/setup.bash
 
+## CAAL module
+export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
 # activemaster() {
 # localmaster
 # export ROS_IP=192.168.0.3
