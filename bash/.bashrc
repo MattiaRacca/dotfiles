@@ -93,9 +93,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias for TF2
-alias tf2='cd /var/tmp && rosrun tf2_tools view_frames.py && evince frames.pdf &'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -154,7 +151,21 @@ function cd
      fi
 }
 
-# Alias for SVN - basically never used
+rm_tmp() {
+    case "$1" in
+    "--safe-run")
+        find . -name "*~" -type f -printf "[safe-run] Removing file %p\n"
+        ;;
+    "")
+        find . -name "*~" -type f -printf "Removing file %p\n" -delete
+        ;;
+    *)
+        echo "Unsupported option \`$1'. Did you mean --safe-run?"
+        ;;
+    esac
+}
+
+# SVN Aliases - used by the changes in prompt
 
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
@@ -165,24 +176,6 @@ parse_svn_url() {
 }
 parse_svn_repository_root() {
   svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
-}
-
-rm_tmp() {
-    case "$1" in
-    "--safe-run")
-        find . -name "*~" -type f -printf "[safe-run] Removing file %p\n"
-        ;;
-    "")
-        find . -name "*~" -type f -printf "Removing file %p\n" -delete
-        ;;
-    *)
-        echo "Unsupported option \`$1'. Did you mean --dry-run?"
-        ;;
-    esac
-}
-
-astyle_package() {
-    find -regextype egrep -regex '.*\.[ch](pp)?$' -exec astyle '{}' --style=allman --indent=spaces=2 --pad-oper --unpad-paren --pad-header --convert-tabs \;
 }
 
 # Enable tab completion
@@ -196,36 +189,40 @@ bluebold="\[\033[1;34m\]"
 purple="\[\033[0;35m\]"
 reset="\[\033[0m\]"
 
-# Change command prompt
+# Change Command prompt
 source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 # '\u' adds the name of the current user to the prompt
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
-export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
+# export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
 export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
-
-### Care-O-bot configs
-# export ROBOT=cob4-8
-# export ROBOT_ENV=ipa-apartment
 
 ## Set default text editor
 export EDITOR='gedit'
 
-## NAO robot configs
-# export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
-# export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
-
-## Source ROS environments
-if [ -f /opt/ros/kinetic/setup.bash ]; then
-    source /opt/ros/kinetic/setup.bash
-fi
-# source /home/mracca/care-o-bot_ws/devel/setup.bash
-# source /home/mracca/activelearner_ws/devel/setup.bash
-
-## CAAL module
-export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
-# activemaster() {
-# localmaster
-# export ROS_IP=192.168.0.3
-# }
+## Which computer am I using?
+case $HOSTNAME in
+    (tp-raccam)
+        ## My work computer!
+        ## NAO robot configs
+        export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
+        export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
+        ### Care-O-bot configs
+        export ROBOT=cob4-8
+        export ROBOT_ENV=ipa-apartment
+        ## Source ROS environments
+        if [ -f /opt/ros/kinetic/setup.bash ]; then
+            source /opt/ros/kinetic/setup.bash
+        else
+            echo "Where is ROS kinetic?"
+        fi
+        ## CAAL module
+        export PYTHONPATH=/home/$USER/caal:$PYTHONPATH;;
+    (mrh-acer)
+        ## My laptop!
+        ;;
+    (*)
+        echo "Where the fuck am I?"
+        ;;
+esac

@@ -20,6 +20,8 @@ alias svnup='svn up && svn log -l 3'
 alias clean='make clean'
 
 ## quality of life functions
+
+## ol' good 'mkdir foo && cd foo'
 mkcd() { mkdir -p "$@" && cd $_; }
 
 ## writing environment function
