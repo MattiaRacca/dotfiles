@@ -17,10 +17,12 @@ alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter notebook'
 alias svnup='svn up && svn log -l 3'
+alias clean='make clean'
 
-## functions
+## quality of life functions
 mkcd() { mkdir -p "$@" && cd $_; }
 
+## writing environment function
 we()
 {
 nohup gedit ./*.tex ./*.bib >/dev/null &

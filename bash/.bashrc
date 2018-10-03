@@ -223,6 +223,8 @@ fi
 # source /home/mracca/care-o-bot_ws/devel/setup.bash
 # source /home/mracca/activelearner_ws/devel/setup.bash
 
+## CAAL module
+export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
 # activemaster() {
 # localmaster
 # export ROS_IP=192.168.0.3
