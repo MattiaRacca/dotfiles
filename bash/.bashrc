@@ -222,6 +222,9 @@ case $HOSTNAME in
     (mrh-acer)
         ## My laptop!
         ;;
+    (mrh-pocket)
+        ## My small resurrected ASUS
+        ;;
     (*)
         echo "Where the fuck am I?"
         ;;
