@@ -17,6 +17,8 @@ alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter notebook'
 alias svnup='svn up && svn log -l 3'
+alias svnst='svn st'
+alias svndiff='svn diff | colordiff'
 alias clean='make clean'
 
 ## quality of life functions
