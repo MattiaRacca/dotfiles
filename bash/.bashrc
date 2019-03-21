@@ -225,6 +225,15 @@ case $HOSTNAME in
     (mrh-pocket)
         ## My small resurrected ASUS
         ;;
+    (robotuna)
+	## Panda pc @ HCR Lab
+	## Source ROS environments
+        if [ -f /opt/ros/kinetic/setup.bash ]; then
+            source /opt/ros/kinetic/setup.bash
+        else
+            echo "Where is ROS kinetic?"
+        fi
+	;;
     (*)
         echo "Where the fuck am I?"
         ;;
