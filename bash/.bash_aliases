@@ -10,6 +10,9 @@ alias h1='ssh -XC robot@cob4-8-h1'
 alias cobmaster='export ROS_MASTER_URI=http://cob4-8-b1:11311'
 alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
 
+## commands for the Franka Panda
+alias pandarecover='rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"'
+
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'

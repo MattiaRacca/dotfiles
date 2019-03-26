@@ -233,7 +233,13 @@ case $HOSTNAME in
         else
             echo "Where is ROS kinetic?"
         fi
-	;;
+	## Source panda_ws
+        if [ -f /home/mracca/panda_ws/devel/setup.bash ]; then
+            source /home/mracca/panda_ws/devel/setup.bash
+        else
+            echo "Did you compile the Panda_WS?"
+        fi
+        ;;
     (*)
         echo "Where the fuck am I?"
         ;;
