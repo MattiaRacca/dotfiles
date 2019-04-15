@@ -239,6 +239,7 @@ case $HOSTNAME in
         else
             echo "Did you compile the Panda_WS?"
         fi
+        export ROBOT_IP=172.16.0.2
         ;;
     (*)
         echo "Where the fuck am I?"
