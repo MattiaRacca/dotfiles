@@ -1,11 +1,15 @@
 #!/bin/bash
+# A Simple Install Script for Ubuntu 16.04
+# Mattia Racca
 
-echo === This script installs things I usually need ===
+echo ===== This script installs things I usually need =====
 
 read -p 'Gonna sudo apt update here. Fine? [y/n]' answer
 if [ "$answer" = y -o -z "$answer" ];then
   sudo apt update
 fi
+
+echo ===== Terminal related stuff =====
 
 read -p 'Do you want vim? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
@@ -17,12 +21,29 @@ if [ "$terminator" = "y" -o -z "$terminator" ];then
   sudo apt install terminator
 fi
 
-read -p 'Do you want gitg? [y/n]: ' answer
+read -p 'Do you want tree command? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install gitg
+  sudo apt install tree
 fi
 
-echo === git account setup ===
+read -p 'Do you want ssh command? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install openssh-server
+fi
+
+echo ===== GUI related stuff =====
+
+read -p 'Do you want unity-tweak tool? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install unity-tweak-tool
+fi
+echo Probably want to get the paper-icon-theme!
+
+# TODO: add install for Skype, GIMP, Inkscape, Slack
+
+echo ===== Done installing main tools =====
+echo ===== git account setup =====
+
 read -p 'What is your git account? ' username
 read -p 'What is your git email? ' email
 
@@ -34,7 +55,13 @@ else
   git config --global user.email $email
 fi
 
-echo ===  We are done with installing! now we can stow the dotfiles ===
+read -p 'Do you want gitg? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install gitg
+fi
+
+echo ===== Done with git related setup! =====
+echo ===== Now we can stow the dotfiles =====
 
 read -p 'We need stow. Fine? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
