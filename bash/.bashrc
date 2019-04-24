@@ -225,6 +225,22 @@ case $HOSTNAME in
     (mrh-pocket)
         ## My small resurrected ASUS
         ;;
+    (robotuna)
+	## Panda pc @ HCR Lab
+	## Source ROS environments
+        if [ -f /opt/ros/kinetic/setup.bash ]; then
+            source /opt/ros/kinetic/setup.bash
+        else
+            echo "Where is ROS kinetic?"
+        fi
+	## Source panda_ws
+        if [ -f /home/mracca/panda_ws/devel/setup.bash ]; then
+            source /home/mracca/panda_ws/devel/setup.bash
+        else
+            echo "Did you compile the Panda_WS?"
+        fi
+        export ROBOT_IP=172.16.0.2
+        ;;
     (*)
         echo "Where the fuck am I?"
         ;;
