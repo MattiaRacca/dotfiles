@@ -241,6 +241,15 @@ case $HOSTNAME in
         fi
         export ROBOT_IP=172.16.0.2
         ;;
+	(robosalmon)
+	## Panda vision pc @ HCR Lab
+	## Source ROS environments
+		if [ -f /opt/ros/kinetic/setup.bash ]; then
+            source /opt/ros/kinetic/setup.bash
+        else
+            echo "Where is ROS kinetic?"
+        fi
+		;;
     (*)
         echo "Where the fuck am I?"
         ;;
