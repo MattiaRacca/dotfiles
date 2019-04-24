@@ -249,6 +249,13 @@ case $HOSTNAME in
         else
             echo "Where is ROS kinetic?"
         fi
+	## Source Panda Vision enviroment
+		if [ -f /home/mracca/vision_ws/devel/setup.bash ]; then
+            source /home/mracca/vision_ws/devel/setup.bash
+        else
+            echo "Did you compile the Vision_WS?"
+        fi
+        export ROBOT_IP=172.16.0.2
 		;;
     (*)
         echo "Where the fuck am I?"
