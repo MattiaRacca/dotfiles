@@ -22,7 +22,7 @@ alias jn='jupyter notebook'
 alias svnup='svn up && svn log -l 3'
 alias svnst='svn st'
 alias svndiff='svn diff | colordiff'
-alias clean='make clean'
+alias devel='source devel/setup.bash'
 
 ## quality of life functions
 
