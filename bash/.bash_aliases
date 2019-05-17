@@ -39,4 +39,4 @@ clear
 }
 
 ## CLION shortcut
-alias clion='cd /home/mracca/clion/bin && ./clion.sh'
+alias clion='~/clion/bin/clion.sh'
