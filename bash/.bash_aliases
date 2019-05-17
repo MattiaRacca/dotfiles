@@ -37,3 +37,6 @@ nautilus .
 evince ./*.pdf &
 clear
 }
+
+## CLION shortcut
+alias clion='cd /home/mracca/clion/bin && ./clion.sh'

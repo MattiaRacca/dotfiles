@@ -23,5 +23,6 @@
     background_image = None
     font = Monospace 12
     foreground_color = "#f4f4f4"
+    scroll_on_output = False
     scrollback_infinite = True
     use_system_font = False
