@@ -60,7 +60,7 @@ fi
 
 read -p 'Do you want to personalize Jupyter? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  jt -t solarizedl -fs 95 -tfs 11 -nfs 115 -cellw 88%
+  jt -t grade3 -fs 95 -tfs 11 -nfs 115 -cellw 88%
 fi
 
 read -p 'Do you want LaTeX? (WARNING: TAKES AGES) [y/n]: ' answer
