@@ -51,6 +51,18 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   rosdep update
 fi
 
+read -p 'Do you want Jupyter Notebook? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  python -m pip install --upgrade pip
+  python -m pip install jupyter
+  python -m pip install jupyterthemes
+fi
+
+read -p 'Do you want to personalize Jupyter? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  jt -t solarizedl -fs 95 -tfs 11 -nfs 115 -cellw 88%
+fi
+
 read -p 'Do you want LaTeX? (WARNING: TAKES AGES) [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install texlive-full
