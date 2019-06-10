@@ -257,6 +257,16 @@ case $HOSTNAME in
         fi
         export ROBOT_IP=172.16.0.2
 		;;
+    (lumi)
+    ## Panda pc @ IR Lab
+    ## Source ROS environments
+		if [ -f /opt/ros/melodic/setup.bash ]; then
+            source /opt/ros/melodic/setup.bash
+        else
+            echo "Where is ROS melodic?"
+        fi
+        export ROBOT_IP=172.16.0.2
+		;;
     (*)
         echo "Where the fuck am I?"
         ;;
