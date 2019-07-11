@@ -234,8 +234,8 @@ case $HOSTNAME in
             echo "Where is ROS kinetic?"
         fi
 	## Source panda_ws
-        if [ -f /home/mracca/panda_ws/devel/setup.bash ]; then
-            source /home/mracca/panda_ws/devel/setup.bash
+        if [ -f /home/$USER/panda_ws/devel/setup.bash ]; then
+            source /home/$USER/panda_ws/devel/setup.bash
         else
             echo "Did you compile the Panda_WS?"
         fi
@@ -250,8 +250,8 @@ case $HOSTNAME in
             echo "Where is ROS kinetic?"
         fi
 	## Source Panda Vision enviroment
-		if [ -f /home/mracca/vision_ws/devel/setup.bash ]; then
-            source /home/mracca/vision_ws/devel/setup.bash
+		if [ -f /home/$USER/vision_ws/devel/setup.bash ]; then
+            source /home/$USER/vision_ws/devel/setup.bash
         else
             echo "Did you compile the Vision_WS?"
         fi
@@ -264,6 +264,16 @@ case $HOSTNAME in
             source /opt/ros/melodic/setup.bash
         else
             echo "Where is ROS melodic?"
+        fi
+        export ROBOT_IP=172.16.0.2
+		;;
+	(LumiThinkCentre)
+	## New Panda pc @ IR Lab
+	## Source ROS environments
+		if [ -f /opt/ros/kinetic/setup.bash ]; then
+            source /opt/ros/kinetic/setup.bash
+        else
+            echo "Where is ROS kinetic?"
         fi
         export ROBOT_IP=172.16.0.2
 		;;
