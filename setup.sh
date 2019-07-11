@@ -146,3 +146,13 @@ if [ "$terminator" = "y" -o -z "$terminator" ];then
 else
   echo "Skipping terminator settings..."
 fi
+
+echo -e "\n===== Done with stowing! =====\n"
+
+read -p 'Do you want the paper theme? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  cd /home/$USER/Documents
+  git clone https://github.com/snwh/paper-gtk-theme.git
+  source paper-gtk-theme/install-gtk-theme.sh
+  cd /home/$USER
+fi
