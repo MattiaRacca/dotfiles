@@ -13,6 +13,10 @@ alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
 ## commands for the Franka Panda
 alias pandarecover='rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"'
 
+## commands for RQT
+# rqtreset: when rqt refuses to find controller that are already installed
+alias rqtreset='rm ~/.config/ros.org/rqt_gui.ini && rqt'
+
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
