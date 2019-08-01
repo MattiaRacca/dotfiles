@@ -218,47 +218,17 @@ case $HOSTNAME in
             echo "Where is ROS kinetic?"
         fi
         ## CAAL module
-        export PYTHONPATH=/home/$USER/caal:$PYTHONPATH;;
+        export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
+        ## PRAL module
+        export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (mrh-acer)
         ## My laptop!
         ;;
     (mrh-pocket)
         ## My small resurrected ASUS
         ;;
-    (robotuna)
-	## Panda pc @ HCR Lab
-	## Source ROS environments
-        if [ -f /opt/ros/kinetic/setup.bash ]; then
-            source /opt/ros/kinetic/setup.bash
-        else
-            echo "Where is ROS kinetic?"
-        fi
-	## Source panda_ws
-        if [ -f /home/$USER/panda_ws/devel/setup.bash ]; then
-            source /home/$USER/panda_ws/devel/setup.bash
-        else
-            echo "Did you compile the Panda_WS?"
-        fi
-        export ROBOT_IP=172.16.0.2
-        ;;
-	(robosalmon)
-	## Panda vision pc @ HCR Lab
-	## Source ROS environments
-		if [ -f /opt/ros/kinetic/setup.bash ]; then
-            source /opt/ros/kinetic/setup.bash
-        else
-            echo "Where is ROS kinetic?"
-        fi
-	## Source Panda Vision enviroment
-		if [ -f /home/$USER/vision_ws/devel/setup.bash ]; then
-            source /home/$USER/vision_ws/devel/setup.bash
-        else
-            echo "Did you compile the Vision_WS?"
-        fi
-        export ROBOT_IP=172.16.0.2
-		;;
     (lumi)
-    ## Panda pc @ IR Lab
+    ## Old Panda pc @ IR Lab
     ## Source ROS environments
 		if [ -f /opt/ros/melodic/setup.bash ]; then
             source /opt/ros/melodic/setup.bash
