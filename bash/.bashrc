@@ -218,7 +218,7 @@ case $HOSTNAME in
             echo "Where is ROS kinetic?"
         fi
         ## CAAL module
-        export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
+        # export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
         ## PRAL module
         export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (mrh-acer)
