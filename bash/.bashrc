@@ -166,7 +166,6 @@ rm_tmp() {
 }
 
 # SVN Aliases - used by the changes in prompt
-
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
 }
@@ -204,11 +203,11 @@ export EDITOR='gedit'
 ## Which computer am I using?
 case $HOSTNAME in
     (tp-raccam)
-        ## My work computer!
+        ### My work laptop
         ## NAO robot configs
         export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
         export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
-        ### Care-O-bot configs
+        ## Care-O-bot configs
         export ROBOT=cob4-8
         export ROBOT_ENV=ipa-apartment
         ## Source ROS environments
@@ -219,34 +218,26 @@ case $HOSTNAME in
         fi
         ## CAAL module
         # export PYTHONPATH=/home/$USER/caal:$PYTHONPATH
-        ## PRAL module
+        ## RAL module
         export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (mrh-acer)
-        ## My laptop!
+        ### My personal laptop
         ;;
     (mrh-pocket)
-        ## My small resurrected ASUS
+        ### My small resurrected ASUS
         ;;
-    (lumi)
-    ## Old Panda pc @ IR Lab
-    ## Source ROS environments
-		if [ -f /opt/ros/melodic/setup.bash ]; then
-            source /opt/ros/melodic/setup.bash
-        else
-            echo "Where is ROS melodic?"
-        fi
-        export ROBOT_IP=172.16.0.2
-		;;
 	(LumiThinkCentre)
-	## New Panda pc @ IR Lab
-	## Source ROS environments
+		### Panda pc @ IR Lab
+		## Source ROS environments
 		if [ -f /opt/ros/kinetic/setup.bash ]; then
             source /opt/ros/kinetic/setup.bash
         else
             echo "Where is ROS kinetic?"
         fi
+		## Export Panda IP
         export ROBOT_IP=172.16.0.2
-		;;
+		## RAL module
+        export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (*)
         echo "Where the fuck am I?"
         ;;
