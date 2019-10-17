@@ -33,12 +33,40 @@ alias devel='source devel/setup.bash && echo $ROS_PACKAGE_PATH'
 ## ol' good 'mkdir foo && cd foo'
 mkcd() { mkdir -p "$@" && cd $_; }
 
-## writing environment function
-we()
-{
-nohup gedit ./*.tex ./*.bib >/dev/null &
+## LaTeX Writing Environment
+function we() {
+NAME="root"
+RECURSIVE=false
+for i in "$@"
+do
+case $i in
+  -n=*|--name=*)
+    NAME="${i#*=}"
+    shift # past argument=value
+  ;;
+  -r|--recursive)
+    RECURSIVE=true
+    shift # past argument with no value
+  ;;
+  *)
+    echo "Unknown argument $i"
+    echo "Arguments are -n (--name) and -r (--recursive)"
+    return
+  ;;
+esac
+done
+nohup gedit "$NAME".tex > /dev/null &
+if [ -f "*.bib" ]; then
+  gedit "*.bib" &
+fi
+if [ -f "$NAME.pdf" ]; then
+  evince "$NAME".pdf &
+fi
+if [ "$RECURSIVE" = true ]; then
+  find . -name '*.tex' -exec gedit {} \;
+  find . -name '*.bib' -exec gedit {} \;
+fi
 nautilus .
-evince ./*.pdf &
 clear
 }
 
