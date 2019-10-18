@@ -46,6 +46,7 @@ case $i in
   ;;
   -r|--recursive)
     RECURSIVE=true
+    echo "Recursively opening .tex and .bib"
     shift # past argument with no value
   ;;
   *)
@@ -55,19 +56,23 @@ case $i in
   ;;
 esac
 done
-nohup gedit "$NAME".tex > /dev/null &
+if [ -f "$NAME.tex" ]; then
+  nohup gedit "$NAME".tex > /dev/null &
+else
+  echo "$NAME.tex not found. Abort"
+  return
+fi
+nohup nautilus . > /dev/null &
 if [ -f "*.bib" ]; then
-  gedit "*.bib" &
+  nohup gedit "*.bib" > /dev/null &
 fi
 if [ -f "$NAME.pdf" ]; then
-  evince "$NAME".pdf &
+  nohup evince "$NAME".pdf > /dev/null &
 fi
 if [ "$RECURSIVE" = true ]; then
-  find . -name '*.tex' -exec gedit {} \;
-  find . -name '*.bib' -exec gedit {} \;
+  find -name '*.tex' -exec nohup gedit {} > /dev/null +;
+  find -name '*.bib' -exec nohup gedit {} > /dev/null +;
 fi
-nautilus .
-clear
 }
 
 ## CLION shortcut
