@@ -17,6 +17,9 @@ alias pandarecover='rostopic pub -1 /franka_control/error_recovery/goal franka_c
 # rqtreset: when rqt refuses to find controller that are already installed
 alias rqtreset='rm ~/.config/ros.org/rqt_gui.ini && rqt'
 
+## CLION shortcut
+alias clion='~/clion/bin/clion.sh'
+
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
@@ -30,14 +33,15 @@ alias devel='source devel/setup.bash && echo $ROS_PACKAGE_PATH'
 alias makeb='make -B' # forces make
 
 ## quality of life functions
-
-## ol' good 'mkdir foo && cd foo'
+# ol' good 'mkdir foo && cd foo'
 mkcd() { mkdir -p "$@" && cd $_; }
 
-## LaTeX Writing Environment
+## LaTeX Writing Environment ('cause I despise LaTeX IDEs)
 function we() {
 NAME="root"
 RECURSIVE=false
+FIGURE_FOLDER="figures"
+FIGURE=false
 for i in "$@"
 do
 case $i in
@@ -50,31 +54,41 @@ case $i in
     echo "Recursively opening .tex and .bib"
     shift # past argument with no value
   ;;
+  -f|--figures)
+    FIGURE=true
+    echo "Opening .tex in $FIGURE_FOLDER"
+    shift # past argument with no value
+  ;;
   *)
     echo "Unknown argument $i"
-    echo "Arguments are -n (--name) and -r (--recursive)"
+    echo "Arguments are -n=main_tex (--name), -r (--recursive), and -f (--figures)"
     return
   ;;
 esac
 done
-if [ -f "$NAME.tex" ]; then
-  nohup gedit "$NAME".tex > /dev/null &
+if [ -e "$NAME.tex" ]; then # if main tex file exists
+  nohup gedit "$NAME".tex &> /dev/null &
 else
   echo "$NAME.tex not found. Abort"
   return
 fi
 nohup nautilus . > /dev/null &
-if [ -f "*.bib" ]; then
-  nohup gedit "*.bib" > /dev/null &
+if [ -e "*.bib" ]; then
+  nohup gedit "*.bib" &> /dev/null &
+else
+  echo "$NAME.bib not found in this folder. Maybe it is in a subfolder?"
 fi
-if [ -f "$NAME.pdf" ]; then
-  nohup evince "$NAME".pdf > /dev/null &
+if [ -e "$NAME.pdf" ]; then # if main pdf already exists
+  nohup evince "$NAME".pdf &> /dev/null &
 fi
-if [ "$RECURSIVE" = true ]; then
-  find -name '*.tex' -exec nohup gedit {} > /dev/null +;
+if $RECURSIVE; then # if we want to search for .tex and .bib recursively
+  echo "Recursive search for .tex and .bib files (except figures)"
+  find -name '*.tex' -not -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
   find -name '*.bib' -exec nohup gedit {} > /dev/null +;
 fi
+if $FIGURE; then # want to open .tex figures (tikz)?
+  echo "Recursive search for .tex and .tikz in $FIGURE_FOLDER"
+  find -name '*.tex' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
+  find -name '*.tikz' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
+fi
 }
-
-## CLION shortcut
-alias clion='~/clion/bin/clion.sh'
