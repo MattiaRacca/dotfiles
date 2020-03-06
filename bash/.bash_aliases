@@ -72,7 +72,7 @@ else
   echo "$NAME.tex not found. Abort"
   return
 fi
-nohup nautilus . > /dev/null &
+nohup nautilus . &> /dev/null &
 if [ -e "*.bib" ]; then
   nohup gedit "*.bib" &> /dev/null &
 else
@@ -83,12 +83,13 @@ if [ -e "$NAME.pdf" ]; then # if main pdf already exists
 fi
 if $RECURSIVE; then # if we want to search for .tex and .bib recursively
   echo "Recursive search for .tex and .bib files (except figures)"
-  find -name '*.tex' -not -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
-  find -name '*.bib' -exec nohup gedit {} > /dev/null +;
+  find -name '*.tex' -not -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
+  # + is part of 'find': it tells to execute the exec command only once for multiple finds
+  find -name '*.bib' -exec nohup gedit {} > /dev/null +
 fi
 if $FIGURE; then # want to open .tex figures (tikz)?
   echo "Recursive search for .tex and .tikz in $FIGURE_FOLDER"
-  find -name '*.tex' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
-  find -name '*.tikz' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +;
+  find -name '*.tex' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
+  find -name '*.tikz' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
 fi
 }
