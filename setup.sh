@@ -77,7 +77,8 @@ fi
 
 read -p 'Do you want Zotero? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo snap install zotero-snap
+  firefox https://www.zotero.org/download/
+  # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
 fi
 
 # TODO: add install for GIMP, Inkscape
@@ -126,6 +127,7 @@ fi
 read -p 'gedit settings? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   dconf load /org/gnome/gedit/ < gedit/gedit.dconf
+  sudo apt install gedit-plugins
 fi
 
 read -p 'git-completion settings? [y/n]: ' answer
