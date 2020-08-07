@@ -221,6 +221,9 @@ case $HOSTNAME in
         ## RAL module
         export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (mrh-acer)
+        ### My old personal laptop
+        ;;
+	(legion)
         ### My personal laptop
         ;;
     (mrh-pocket)
