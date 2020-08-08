@@ -81,6 +81,15 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
 fi
 
+read -p 'Do you want Dropbox? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  firefox https://www.dropbox.com/install-linux
+  echo -e "\n Add @reboot ~/Documents/Miscellanea/dropbox-dist/dropboxd to crontab -e\n"
+  read -p 'Done? [y/n]: ' otheranswer
+  sudo apt install nautilus-dropbox
+  # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
+fi
+
 # TODO: add install for GIMP, Inkscape
 
 echo -e "\n===== Done installing main tools =====\n"
