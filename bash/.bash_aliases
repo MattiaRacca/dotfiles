@@ -42,6 +42,9 @@ NAME="root"
 RECURSIVE=false
 FIGURE_FOLDER="figures"
 FIGURE=false
+if [ $DESKTOP_SESSION == "i3" ]; then
+	i3-msg "append_layout ~/.config/i3/latex-workspace.json"
+fi
 for i in "$@"
 do
 case $i in
@@ -72,7 +75,9 @@ else
   echo "$NAME.tex not found. Abort"
   return
 fi
-nohup nautilus . &> /dev/null &
+if ! [ $DESKTOP_SESSION == "i3" ]; then
+	nohup nautilus . &> /dev/null &
+fi
 if [ -e "*.bib" ]; then
   nohup gedit "*.bib" &> /dev/null &
 else
@@ -91,5 +96,10 @@ if $FIGURE; then # want to open .tex figures (tikz)?
   echo "Recursive search for .tex and .tikz in $FIGURE_FOLDER"
   find -name '*.tex' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
   find -name '*.tikz' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
+fi
+if [ $DESKTOP_SESSION == "i3" ]; then
+  gnome-terminal &
+  sleep 1 
+  exit
 fi
 }
