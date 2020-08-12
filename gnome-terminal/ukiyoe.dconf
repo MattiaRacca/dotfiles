@@ -1,0 +1,18 @@
+[/]
+foreground-color='rgb(241,241,241)'
+cjk-utf8-ambiguous-width='narrow'
+visible-name='ukiyo-e'
+palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(125,178,90)', 'rgb(74,180,205)', 'rgb(247,177,35)', 'rgb(117,80,123)', 'rgb(106,137,230)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(222,66,31)', 'rgb(176,231,139)', 'rgb(134,211,229)', 'rgb(250,203,109)', 'rgb(173,127,168)', 'rgb(119,183,244)', 'rgb(238,238,236)']
+bold-is-bright=true
+use-system-font=false
+use-transparent-background=true
+highlight-colors-set=false
+use-theme-colors=false
+font='Monospace 15'
+use-theme-transparency=false
+scrollback-unlimited=true
+bold-color-same-as-fg=false
+bold-color='rgb(223,223,223)'
+background-color='rgb(42,42,35)'
+background-transparency-percent=11
+scrollbar-policy='never'
