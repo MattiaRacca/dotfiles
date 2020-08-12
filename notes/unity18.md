@@ -3,13 +3,6 @@
 - `sudo apt install unity-tweak-tool`
 - remove gnome: `sudo apt remove gnome-shell`
 
-# INSTALL GRUB-CUSTOMIZER
-```sh
-sudo add-apt-repository ppa:danielrichter2007/grub-customizer
-sudo apt update
-sudo apt install grub-customizer
-```
-
 # SOLVE UNITY PROBLEM WITH KEYBOARD SHORTCUTS and FN KEYS:
 - read https://askubuntu.com/questions/1081241/keyboard-shortcuts-dont-work-on-ubuntu-18-04-with-unity
 ```sh
