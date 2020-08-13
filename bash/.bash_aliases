@@ -30,6 +30,7 @@ alias svnup='svn up && svn log -l 3'
 alias svnst='svn st'
 alias svndiff='svn diff | colordiff'
 alias devel='source devel/setup.bash && echo $ROS_PACKAGE_PATH'
+alias gitst='git status'
 alias github='git remote get-url origin | xargs firefox'
 
 ## quality of life functions
