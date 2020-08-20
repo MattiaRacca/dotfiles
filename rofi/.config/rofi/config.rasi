@@ -3,7 +3,7 @@ configuration {
 width: 30;
 /*	lines: 15;*/
 columns: 1;
-font: "Ubuntu Mono 16";
+font: "Dejavu Sans Mono 13";
 /*	bw: 1;*/
 location: 0;
 /*	padding: 5;*/

@@ -14,7 +14,7 @@ set $sup Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Ubuntu Mono 14
+font pango:Dejavu Sans Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -229,20 +229,21 @@ assign [class="Skype"] $ws6
 assign [class="Gnome-calendar"] $ws10
 
 #### Keyboard layout switcher
-exec_always "setxkbmap -layout it,de"
-exec_always "setxkbmap -option 'grp:win_space_toggle'"
+exec_always --no-startup-id "setxkbmap -layout it,de -option 'grp:win_space_toggle'"
+
+#### Dunst as notification daemon
+exec_always --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 
 #### Feh for wallpaper
-exec_always feh --bg-scale /home/$USER/Pictures/Wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale /home/$USER/Pictures/Wallpaper.jpg
 
 #### Compton for transparency and transitions
-exec_always compton -f -D 4
+exec_always --no-startup-id compton -f -D 4 -b
 
 #### Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #### Startup Apps
 exec --no-startup-id firefox
-# Startup workspace is 2 by default. with a terminal
+# Startup workspace is 2 by default
 exec --no-startup-id i3-msg workspace 2
-exec --no-startup-id i3-sensible-terminal
