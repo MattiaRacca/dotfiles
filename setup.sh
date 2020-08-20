@@ -44,7 +44,6 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   echo -e "\n Add @reboot ~/Documents/Miscellanea/dropbox-dist/dropboxd to crontab -e\n"
   read -p 'Done? [y/n]: ' otheranswer
   sudo apt install nautilus-dropbox
-  # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
 fi
 
 read -p 'Do you want Skype? [y/n]: ' answer
