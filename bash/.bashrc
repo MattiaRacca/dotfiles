@@ -151,20 +151,6 @@ function cd
      fi
 }
 
-rm_tmp() {
-    case "$1" in
-    "--safe-run")
-        find . -name "*~" -type f -printf "[safe-run] Removing file %p\n"
-        ;;
-    "")
-        find . -name "*~" -type f -printf "Removing file %p\n" -delete
-        ;;
-    *)
-        echo "Unsupported option \`$1'. Did you mean --safe-run?"
-        ;;
-    esac
-}
-
 # SVN Aliases - used by the changes in prompt
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
@@ -198,7 +184,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
 
 ## Set default text editor
-export EDITOR='gedit'
+export EDITOR='vim'
 
 ## Which computer am I using?
 case $HOSTNAME in
@@ -223,23 +209,23 @@ case $HOSTNAME in
     (mrh-acer)
         ### My old personal laptop
         ;;
-	(legion)
+    (legion)
         ### My personal laptop
         ;;
     (mrh-pocket)
         ### My small resurrected ASUS
         ;;
-	(LumiThinkCentre)
-		### Panda pc @ IR Lab
-		## Source ROS environments
-		if [ -f /opt/ros/kinetic/setup.bash ]; then
+    (LumiThinkCentre)
+        ## Panda pc @ IR Lab
+        ## Source ROS environments
+        if [ -f /opt/ros/kinetic/setup.bash ]; then
             source /opt/ros/kinetic/setup.bash
         else
             echo "Where is ROS kinetic?"
         fi
-		## Export Panda IP
+        ## Export Panda IP
         export ROBOT_IP=172.16.0.2
-		## RAL module
+        ## RAL module
         export PYTHONPATH=/home/$USER/panda_ws/src/range_al:$PYTHONPATH;;
     (*)
         echo "Where the fuck am I?"
