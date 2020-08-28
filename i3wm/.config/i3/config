@@ -50,8 +50,8 @@ bindsym XF86MonBrightnessDown   exec xbacklight - 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym Ctrl+$mod+t exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
+bindsym Ctrl+$mod+t exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -185,24 +185,31 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #### Windows appearance stuff
-set $bg-color 	         #636256
-set $inactive-bg-color   #4d4c40
-set $text-color          #facb6d
-set $inactive-text-color #636256
-set $urgent-bg-color     #de421f
-set $indicator-color	 #00FF00
+set_from_resource $fg foreground
+set_from_resource $bg background
+set_from_resource $bg-inactive background-inactive
+set_from_resource $fg-inactive foreground-inactive
+set_from_resource $bg-urgent background-urgent
+set_from_resource $fg-urgent foreground-urgent
+## Old Ukiyo-e colors
+# set $bg-color         #636256
+# set $bg-inactive      #4d4c40
+# set $fg               #facb6d
+# set $fg-inactive      #636256
+# set $bg-urgent        #de421f
+set $indicator-color    #00FF00
 
 # window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color       	$bg-color          $text-color          $indicator-color
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color
+#                       border              background          text            indicator
+client.focused          $bg                 $bg                 $fg             $indicator-color
+client.unfocused        $bg-inactive        $bg-inactive        $fg-inactive    $indicator-color
+client.focused_inactive $bg-inactive        $bg-inactive        $fg-inactive    $indicator-color
+client.urgent           $bg-urgent          $bg-urgent          $fg-urgent      $indicator-color
 hide_edge_borders both
 
 # Turns out I don't like gaps on a laptop screen
-# for_window [class=".*"] border pixel 5
-# gaps inner 4 
+for_window [class=".*"] border pixel 5
+# gaps inner 4
 # gaps outer 2
 
 # Stuff that is better in floating

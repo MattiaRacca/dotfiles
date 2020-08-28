@@ -2,9 +2,9 @@
 
 ## @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ## vpn_module: vpn scripts for a polybar, setup NordVPN
-## 	by Shervin S. (shervin@tuta.io), modified for Nordvpn by Mattia Racca (@MattiaRacca)
+##	by Shervin S. (shervin@tuta.io), modified for Nordvpn by Mattia Racca (@MattiaRacca)
 
-## 	vpn_module reports your VPN's status as [country_code | connecting... | No VPN ].
+##	vpn_module reports your VPN's status as [country_code | connecting... | No VPN ].
 
 ##	dependencies:
 ##	nordvpn
@@ -34,9 +34,9 @@ CONNECTING=Connecting
 SHOW_IP=false
 
 ## [Set colors] (set each variable to nothing for default color)
-COLOR_CONNECTED=#86abb4
-COLOR_CONNECTING=#facb6d
-COLOR_DISCONNECTED=#de421f
+COLOR_CONNECTED=$(xrdb -query | grep 'color6' | head -1 | awk '{print $NF}') #86abb4
+COLOR_CONNECTING=$(xrdb -query | grep 'color3'| head -1 | awk '{print $NF}') #facb6d
+COLOR_DISCONNECTED=$(xrdb -query | grep 'color1'| head -1 | awk '{print $NF}') #de421f
 
 ## [Set 4 favorite VPN locations]
 VPN_LOCATIONS=("fi" "it" "de" "ch")
@@ -45,8 +45,8 @@ VPN_LOCATIONS=("fi" "it" "de" "ch")
 icon_connect=
 icon_fav=
 icon_p2p=
-rofi_font="Dejavu Sans Mono 13"
-rofi_theme=".config/rofi/Ukiyo-e.rasi"
+# rofi_font="Dejavu Sans Mono 13"
+# rofi_theme=".config/rofi/Ukiyo-e.rasi"
 rofi_location="-location 0"
 rofi_menu_name="Nordvpn"
 
@@ -92,7 +92,7 @@ vpn_location_menu() {
 # Allows control of VPN via rofi menu. Selects from VPN_LOCATIONS.
 	if hash rofi 2>/dev/null; then
 		MENU="$(rofi \
-			-font "$rofi_font" -theme "$rofi_theme" $rofi_location \
+			$rofi_location \
 			-columns 1 -width 10 -hide-scrollbar \
 			-line-padding 4 -padding 10 -lines 6 \
 			-sep "|" -dmenu -i -p "$rofi_menu_name" <<< \

@@ -1,0 +1,88 @@
+! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
+
+! Project:    Nord XResources
+! Version:    0.1.0
+! Repository: https://github.com/arcticicestudio/nord-xresources
+! License:    MIT
+
+! darks
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+! lights
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+! blues
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+! rest: red, orange, yellow, green, magenta
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
+
+*.foreground: nord5
+*.background: nord1
+*.foreground-inactive: nord3
+*.background-inactive: nord0
+*.foreground-urgent: nord13
+*.background-urgent: nord11
+*.foreground-error: nord1
+*.background-error: nord12
+*.foreground-accent: nord13
+
+*.cursorColor:  nord4
+*fading: 35
+*fadeColor: nord3
+
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
+
+! URxvt
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+! fonts and darker background
+URxvt.font: xft:DejaVu Sans Mono:size=13
+URxvt.depth: 32
+URxvt.background: [95]nord0
+! no ugly bar
+URxvt.scrollBar: false
+
+! extensions
+URxvt.perl-ext-common:  default,resize-font
+! copy-paste
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+! increase font with shortcuts
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+
+! ROFI SETUP
+rofi.color-window: nord1, nord1, nord1
+rofi.color-normal: nord1, nord5, nord1, nord1, nord13
+rofi.color-active: nord1, nord5, nord1, nord1, nord13
+rofi.color-urgent: nord1, nord5, nord1, nord1, nord13

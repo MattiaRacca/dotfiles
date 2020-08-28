@@ -50,7 +50,7 @@ show-icons: true;
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "Ukiyo-e";
+/*      theme: "Ukiyo-e";*/
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -89,7 +89,7 @@ display-drun: "Launch: ";
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
 /*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-kb-row-down: "Down,Alt+Tab";
+/*      kb-row-down: "Down,Alt+Tab";*/
 /*	kb-row-tab: "Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/

@@ -3,7 +3,7 @@
 ## Created By Mattia Racca
 # Taunts from https://ageofempires.fandom.com/wiki/Taunts
 
-TAUNT="$(rofi -dmenu -i -p '' -location 2 -width 3 -lines 0)"
+TAUNT="$(rofi -dmenu -i -p '' -location 2 -width 4 -lines 0)"
 
 if [[ "$TAUNT" == "h" ]]; then
   HELP="Available taunts: "

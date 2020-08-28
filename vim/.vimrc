@@ -9,6 +9,8 @@ syntax on
 
 " Partial commands in the bar
 set showcmd
+" Hidden for buffers
+set hidden
 
 " Highlight search
 set hlsearch
@@ -74,8 +76,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-wombat-scheme'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'mboughaba/i3config.vim'
-" Plug 'dense-analysis/ale'
 Plug 'tell-k/vim-autopep8'
 call plug#end()
 

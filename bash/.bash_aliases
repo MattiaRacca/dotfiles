@@ -5,6 +5,7 @@ alias t2='ssh -XC robot@10.4.8.22'
 alias t3='ssh -XC robot@10.4.8.23'
 alias s1='ssh -XC robot@10.4.8.31'
 alias h1='ssh -XC robot@10.4.8.41'
+alias xup='xrdb ~/.Xresources'
 
 ## commands for letting know ROS where the roscore is running
 alias cobmaster='export ROS_MASTER_URI=http://10.4.8.11:11311'
