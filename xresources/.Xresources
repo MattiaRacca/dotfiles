@@ -68,9 +68,12 @@ URxvt*scrollTtyKeypress: true
 ! fonts and darker background
 URxvt.font: xft:DejaVu Sans Mono:size=13
 URxvt.depth: 32
-URxvt.background: [95]nord0
+URxvt.background: [98]#262626
 ! no ugly bar
 URxvt.scrollBar: false
+! weird boxes I dont know/want
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! extensions
 URxvt.perl-ext-common:  default,resize-font
