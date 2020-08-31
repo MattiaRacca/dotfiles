@@ -21,10 +21,13 @@
 #define nord9 #81A1C1
 #define nord10 #5E81AC
 ! rest: red, orange, yellow, green, magenta
-#define nord11 #BF616A
+! #define nord11 #BF616A
+#define nord11 #d14f5c
 #define nord12 #D08770
-#define nord13 #EBCB8B
-#define nord14 #A3BE8C
+! #define nord13 #EBCB8B
+#define nord13 #facb6d
+! #define nord14 #A3BE8C
+#define nord14 #c0e4a8
 #define nord15 #B48EAD
 
 *.foreground: nord5
@@ -38,7 +41,7 @@
 *.foreground-accent: nord13
 
 *.cursorColor:  nord4
-*fading: 35
+*fading: 15
 *fadeColor: nord3
 
 *.color0: nord1

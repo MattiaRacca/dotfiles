@@ -214,11 +214,18 @@ for_window [class=".*"] border pixel 5
 
 # Stuff that is better in floating
 for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Nm-connection-editor"] border normal
+
 for_window [class="Gitg"] floating enable
 for_window [class="Gitg"] resize set 1280 800
 for_window [class="Gitg"] move position center
+
 for_window [class="zoom"] floating enable
+for_window [class="zoom"] border normal
+
 for_window [class="Skype"] floating enable
+for_window [class="Skype"] border normal
+
 for_window [class="Eog"] floating enable
 
 #### Bindsym for frequently used programs

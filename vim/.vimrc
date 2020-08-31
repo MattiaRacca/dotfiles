@@ -51,7 +51,7 @@ set softtabstop=4
 set expandtab
 
 "------------------------------------------------------------
-" Mappings {{{1
+" Mappings
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
@@ -65,6 +65,11 @@ nnoremap <C-L> :nohl<CR><C-L>
 nmap <silent> <F3> :exec &nu==&rnu? "se nu!" : "se rnu!"<CR>
 set number
 
+" Weird mappings on the arrow keys...
+map Oc <C-Right>
+map! Oc <C-Right>
+map Od <C-Left>
+map! Od <C-Left>
 "------------------------------------------------------------
 " Plugins with vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -108,5 +113,5 @@ function HighlightBadWhitespace()
 endfunction
 " use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
-nnoremap <F9> :set list! <CR>
+noremap <F9> :set list! <CR>
 call HighlightBadWhitespace()
