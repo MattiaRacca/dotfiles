@@ -31,6 +31,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # bindsym $mod+l exec $HOME/.config/i3/decentlock.sh
 bindsym Ctrl+Mod1+l exec $HOME/.config/i3/decentlock.sh
 
+# Display switcher
+bindsym $mod+p exec --no-startup-id $HOME/.config/i3/display.sh
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
@@ -165,7 +168,7 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        #`####°°§bindsym j resize shrink width 10 px or 10 ppt
+        # bindsym j resize shrink width 10 px or 10 ppt
         # bindsym k resize grow height 10 px or 10 ppt
         # bindsym l resize shrink height 10 px or 10 ppt
         # bindsym ograve resize grow width 10 px or 10 ppt

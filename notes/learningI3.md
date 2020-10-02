@@ -22,3 +22,6 @@ see https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/
 
 #### To reset gmail calendar:
 /usr/lib/gnome-online-accounts/goa-daemon --replace
+
+#### To force no suspend on close lid
+see https://askubuntu.com/questions/15520/how-can-i-tell-ubuntu-to-do-nothing-when-i-close-my-laptop-lid

@@ -71,7 +71,7 @@ URxvt*scrollTtyKeypress: true
 ! fonts and darker background
 URxvt.font: xft:DejaVu Sans Mono:size=13
 URxvt.depth: 32
-URxvt.background: [98]#262626
+URxvt.background: [95]#262626
 ! no ugly bar
 URxvt.scrollBar: false
 ! weird boxes I dont know/want
