@@ -253,7 +253,10 @@ exec_always --no-startup-id "setxkbmap -layout it,de -option 'grp:win_space_togg
 exec_always --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 
 #### Feh for wallpaper
-exec_always --no-startup-id feh --bg-scale /home/$USER/Pictures/Wallpaper.jpg
+exec_always --no-startup-id feh --bg-scale /home/$USER/Pictures/Wallpaper.png
+
+#### Xrdb refresh
+exec_always --no-startup-id xrdb ~/.Xresources
 
 #### Compton for transparency and transitions
 exec_always --no-startup-id compton -f -D 4 -b

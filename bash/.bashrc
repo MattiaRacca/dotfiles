@@ -189,7 +189,7 @@ export EDITOR='vim'
 ## Which computer am I using?
 case $HOSTNAME in
     (tp-raccam)
-        ### My work laptop
+        ### My Aalto laptop
         ## NAO robot configs
         export PYTHONPATH=/home/$USER/Libraries/naoqi/pynaoqi-python2.7-2.1.4.13-linux64:$PYTHONPATH
         export AL_DIR=/home/$USER/Libraries/naoqi/naoqi-sdk-2.1.4.13-linux64
@@ -211,6 +211,9 @@ case $HOSTNAME in
         ;;
     (legion)
         ### My personal laptop
+        ;;
+    (rli-pavilion)
+        ### My Idiap laptop
         ;;
     (mrh-pocket)
         ### My small resurrected ASUS

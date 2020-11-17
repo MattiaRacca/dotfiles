@@ -14,6 +14,8 @@ echo -e "\n===== Terminal related stuff =====\n"
 read -p 'Do you want vim? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install vim
+  # curl to get the plugins with vim-plug
+  sudo apt install curl
 fi
 
 read -p 'Do you want terminator? [y/n]: ' terminator
@@ -50,6 +52,13 @@ read -p 'Do you want Skype? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   sudo snap install skype --classic
 fi
+
+read -p 'Do you want Nordvpn? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  firefox https://support.nordvpn.com/Connectivity/Linux/1325531132/Installing-and-using-NordVPN-on-Debian-Ubuntu-Elementary-OS-and-Linux-Mint.htm
+  read -p 'Done [y/n] ' otheranswer
+fi
+
 
 echo -e "\n===== Work related stuff like ROS, LaTeX and Slack =====\n"
 
