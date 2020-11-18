@@ -4,7 +4,7 @@
 
 read -p 'Do you want Paper-Icon? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo add-apt-repository ppa:snwh/pulp
+  sudo add-apt-repository ppa:snwh/ppa
   sudo apt update && sudo apt install paper-icon-theme
 fi
 

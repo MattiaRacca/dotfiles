@@ -1,0 +1,8 @@
+[user]
+	name = MattiaRacca
+	email = mattia.rh@gmail.com
+[alias]
+        st = status
+        co = checkout
+        cm = commit
+        ps = push

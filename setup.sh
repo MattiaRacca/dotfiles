@@ -120,20 +120,7 @@ if [ "$answer" = "y" -o -z "$answer" ];then
 fi
 
 echo -e "===== GIT account setup =====\n"
-
-read -p 'Want to set up the git account? [y/n]' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  read -p 'What is your git account? ' username
-  read -p 'What is your git email? ' email
-
-  if [ -z "$username" -o -z "$email" ];then
-    echo Not configuring git account...
-  else
-    echo git account configured
-    git config --global user.name "$username"
-    git config --global user.email $email
-  fi
-fi
+echo -e "git account now stowable with stow git (info in .gitconfig)"
 
 read -p 'Do you want gitg? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
