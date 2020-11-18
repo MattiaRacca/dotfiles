@@ -69,7 +69,7 @@ URxvt*scrollWithBuffer: true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
 ! fonts and darker background
-URxvt.font: xft:DejaVu Sans Mono:size=13
+URxvt.font: xft:DejaVu Sans Mono:size=12
 URxvt.depth: 32
 URxvt.background: [95]#262626
 ! no ugly bar
