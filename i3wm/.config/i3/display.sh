@@ -7,7 +7,7 @@
 # The result is 4 options appearing in dmenu, from which you can choose
 
 # This is your default laptop screen, detect by running `xrandr`
-INTERNAL_OUTPUT="DP-4"
+INTERNAL_OUTPUT="eDP-1-1"
 
 # Your choice in dmenu will determine what xrandr command to run
 # chosen=$(echo -e $choices | dmenu -i)
