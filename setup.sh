@@ -113,6 +113,13 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sudo snap install slack --classic
 fi
 
+read -p 'Do you want Zoom? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  wget -O Downloads/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
+  sudo snap install slack --classic
+  sudo apt -f install
+fi
+
 read -p 'Do you want Zotero? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   firefox https://www.zotero.org/download/
