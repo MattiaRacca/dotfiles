@@ -174,6 +174,14 @@ bluebold="\[\033[1;34m\]"
 purple="\[\033[0;35m\]"
 reset="\[\033[0m\]"
 
+__conda_ps1 ()
+{
+        if [ -z "$CONDA_DEFAULT_ENV" ]; then return; fi
+        local conda_env=$(basename $CONDA_DEFAULT_ENV)
+        local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2])')
+        echo " [$conda_env|$python_version]"
+}
+
 # Change Command prompt
 source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -181,7 +189,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
 # export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
-export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
+export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch)$greenbold\$(__conda_ps1) $blue\W $reset"
 
 ## Set default text editor
 export EDITOR='vim'
@@ -211,9 +219,37 @@ case $HOSTNAME in
         ;;
     (legion)
         ### My personal laptop
+        # >>> conda initialize >>>
+        # !! Contents within this block are managed by 'conda init' !!
+        __conda_setup="$('/home/raccam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "/home/raccam/miniconda3/etc/profile.d/conda.sh" ]; then
+                . "/home/raccam/miniconda3/etc/profile.d/conda.sh"
+            else
+                export PATH="/home/raccam/miniconda3/bin:$PATH"
+            fi
+        fi
+        unset __conda_setup
+        # <<< conda initialize <<<
         ;;
     (rli-pavilion)
         ### My Idiap laptop
+        # >>> conda initialize >>>
+        # !! Contents within this block are managed by 'conda init' !!
+        __conda_setup="$('/home/raccam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+        if [ $? -eq 0 ]; then
+            eval "$__conda_setup"
+        else
+            if [ -f "/home/raccam/miniconda3/etc/profile.d/conda.sh" ]; then
+                . "/home/raccam/miniconda3/etc/profile.d/conda.sh"
+            else
+                export PATH="/home/raccam/miniconda3/bin:$PATH"
+            fi
+        fi
+        unset __conda_setup
+        # <<< conda initialize <<<
         ;;
     (mrh-pocket)
         ### My small resurrected ASUS
@@ -234,3 +270,5 @@ case $HOSTNAME in
         echo "Where the fuck am I?"
         ;;
 esac
+
+
