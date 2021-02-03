@@ -42,7 +42,7 @@ alias github='git remote get-url origin | xargs firefox'
 
 ## quality of life functions
 # ol' good 'mkdir foo && cd foo'
-mkcd() { mkdir -p "$@" && cd $_; }
+function mkcd() { mkdir -p "$@" && cd $_; }
 
 ## LaTeX Writing Environment ('cause I despise LaTeX IDEs)
 function we() {
@@ -110,4 +110,63 @@ if [ $DESKTOP_SESSION == "i3" ]; then
   sleep 1 
   exit
 fi
+}
+
+# Override the cd builtin to do some nice things
+function cd
+{
+	# If no arguments (change to ~)
+	if [[ $# -eq 0 ]]
+	then
+	# Get the current repo
+	local repo="$(git rev-parse --show-toplevel 2>/dev/null)"
+	# If we are in a repo and we are not already in the repo root
+	if [[ -n "$repo" && "$PWD" != "$repo" ]]
+	then
+             # Go to the repo root
+             builtin cd $repo
+         else
+             # Pass through (go to ~)
+             builtin cd "$@"
+         fi
+     else
+         # Pass through (go to the directory specified by the argument(s))
+         builtin cd "$@"
+     fi
+     # If we have successfully changed directory, do more magic
+     if [[ $? -eq 0 ]]
+     then
+         # If we are now in a git repo
+         if git rev-parse --show-toplevel &>/dev/null
+         then
+             # If the previous directory was not in the current git repo
+             if ! [[ "$OLDPWD" == "$(git rev-parse --show-toplevel)"* ]]
+             then
+                 # We are entering a git repo: print last commit message
+                 echo "Last local commit:"
+                 git log -1
+             fi
+         fi
+     fi
+}
+
+# SVN Aliases - used by the changes in prompt
+parse_svn_branch() {
+    parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
+}
+
+parse_svn_url() {
+  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
+}
+parse_svn_repository_root() {
+  svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
+}
+
+## conda styling of Command prompt
+__conda_ps1 ()
+{
+        if [ -z "$CONDA_DEFAULT_ENV" ]; then return; fi
+        local conda_env=$(basename $CONDA_DEFAULT_ENV)
+        local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2])')
+        echo " [$conda_env|$python_version]"
 }
