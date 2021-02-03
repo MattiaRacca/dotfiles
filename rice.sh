@@ -36,8 +36,6 @@ if [ $DESKTOP_SESSION == "i3" ]; then
   sudo apt install polybar
   # urvxt
   sudo apt install rxvt-unicode
-  # mpv
-  sudo apt intsall mpv
   # dunst
   firefox https://github.com/dunst-project/dunst
   # networkmanager_dmenu
