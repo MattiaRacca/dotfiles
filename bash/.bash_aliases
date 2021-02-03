@@ -1,11 +1,3 @@
-## ssh command to the COb computers as admin
-alias b1='ssh -XC robot@10.4.8.11'
-alias t1='ssh -XC robot@10.4.8.21'
-alias t2='ssh -XC robot@10.4.8.22'
-alias t3='ssh -XC robot@10.4.8.23'
-alias s1='ssh -XC robot@10.4.8.31'
-alias h1='ssh -XC robot@10.4.8.41'
-
 ## alias for Xresources
 alias xup='xrdb ~/.Xresources'
 
@@ -13,8 +5,10 @@ alias xup='xrdb ~/.Xresources'
 alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
 alias juraout='ssh -XC mracca@login.idiap.ch'
 
+## TODO: add jupyter kernel commands
+# https://queirozf.com/entries/jupyter-kernels-how-to-add-change-remove
+
 ## commands for letting know ROS where the roscore is running
-alias cobmaster='export ROS_MASTER_URI=http://10.4.8.11:11311'
 alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
 
 ## commands for the Franka Panda
@@ -24,24 +18,16 @@ alias pandarecover='rostopic pub -1 /franka_control/error_recovery/goal franka_c
 # rqtreset: when rqt refuses to find controller that are already installed
 alias rqtreset='rm ~/.config/ros.org/rqt_gui.ini && rqt'
 
-## CLION shortcut
-alias clion='~/clion/bin/clion.sh'
-
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
 alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter notebook'
-alias svnup='svn up && svn log -l 3'
-alias svnst='svn st'
-alias svndiff='svn diff | colordiff'
 alias devel='source devel/setup.bash && echo $ROS_PACKAGE_PATH'
-alias gitst='git status'
 alias github='git remote get-url origin | xargs firefox'
 
-## quality of life functions
-# ol' good 'mkdir foo && cd foo'
+## ol' good 'mkdir foo && cd foo'
 function mkcd() { mkdir -p "$@" && cd $_; }
 
 ## LaTeX Writing Environment ('cause I despise LaTeX IDEs)
@@ -107,7 +93,7 @@ if $FIGURE; then # want to open .tex figures (tikz)?
 fi
 if [ $DESKTOP_SESSION == "i3" ]; then
   gnome-terminal &
-  sleep 1 
+  sleep 1
   exit
 fi
 }

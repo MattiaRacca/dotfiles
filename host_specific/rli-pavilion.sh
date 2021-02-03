@@ -1,5 +1,13 @@
 ### My Idiap laptop
 
+export TERMINFO=/usr/share/terminfo
+
+if [ -f /opt/ros/melodic/setup.bash ]; then
+    source /opt/ros/melodic/setup.bash
+else
+    echo "Where is ROS melodic?"
+fi
+
 # >>> conda initialize >>>
 __conda_setup="$('/home/raccam/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -13,9 +21,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-if [ -f /opt/ros/melodic/setup.bash ]; then
-    source /opt/ros/melodic/setup.bash
-else
-    echo "Where is ROS melodic?"
-fi
