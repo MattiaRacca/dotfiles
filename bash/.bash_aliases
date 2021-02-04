@@ -24,8 +24,18 @@ alias :q='echo This is not Vim you silly fool'
 alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter notebook'
-alias devel='source devel/setup.bash && echo $ROS_PACKAGE_PATH'
 alias github='git remote get-url origin | xargs firefox'
+alias re='exec bash'
+
+## ROS "source devel/setup.bash" function that outputs a bunch of useful info
+function devel() {
+  orange='\033[0;33m'
+  orangebold='\033[1;33m'
+  reset='\033[0m'
+  source devel/setup.bash
+  echo -e $orangebold$ROS_DISTRO$reset
+  echo -e $orange$ROS_PACKAGE_PATH
+}
 
 ## ol' good 'mkdir foo && cd foo'
 function mkcd() { mkdir -p "$@" && cd $_; }
