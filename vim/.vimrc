@@ -115,3 +115,6 @@ endfunction
 set listchars=tab:>-,trail:.,extends:>
 noremap <F9> :set list! <CR>
 call HighlightBadWhitespace()
+
+" automatic .launch highlighting (xml)
+au BufNewFile,BufRead *.launch set filetype=xml
