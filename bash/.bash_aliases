@@ -37,6 +37,35 @@ function devel() {
   echo -e $orange$ROS_PACKAGE_PATH
 }
 
+# simple Bluetooth (dis)connect from command line
+bluez () {
+    declare -A list=( [sony]='04:21:44:1E:73:02' [aukey]='FC:58:FA:24:47:47' )
+    pactl load-module module-bluetooth-policy &>/dev/null
+    pactl load-module module-bluetooth-discover &>/dev/null
+
+    found=false
+    for value in sony aukey
+    do
+        if [ "$2" = $value ]; then
+            found=true
+        fi
+    done
+    if [ "$found" = true ]; then
+        echo "Connecting to $2 at  ${list[$2]}..."
+        if [ "$1" = con ] || [ "$1" = c ]; then
+            echo -e "power on" | bluetoothctl
+            sleep 3
+            echo -e "connect ${list[$2]} \n exit" | bluetoothctl
+        elif [ "$1" = dis ] || [ "$1" = d ]; then
+            echo -e "disconnect ${list[$2]} \n power off \n exit" | bluetoothctl
+        else
+            echo "Unknown operation use (c)on or (d)is"
+        fi
+    else
+        echo "Unknown device"
+    fi
+}
+
 ## ol' good 'mkdir foo && cd foo'
 function mkcd() { mkdir -p "$@" && cd $_; }
 
