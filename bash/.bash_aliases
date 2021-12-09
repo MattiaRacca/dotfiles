@@ -192,6 +192,6 @@ __conda_ps1 ()
 {
         if [ -z "$CONDA_DEFAULT_ENV" ]; then return; fi
         local conda_env=$(basename $CONDA_DEFAULT_ENV)
-        local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2])')
+        local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2:].partition(".")[0])')
         echo " [$conda_env|$python_version]"
 }
