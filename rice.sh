@@ -43,6 +43,8 @@ if [ $DESKTOP_SESSION == "i3" ]; then
   stow urxvt
   # mpv
   sudo apt install mpv
+  # imagemagick for the lockscreen
+  sudo apt install imagemagick
   # dunst
   sudo apt install dunst
   # networkmanager_dmenu
