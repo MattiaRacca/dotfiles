@@ -18,6 +18,8 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sudo add-apt-repository ppa:kgilmer/speed-ricer
   sudo apt update && sudo apt install i3-gaps
   i3-config-wizard
+  stow i3wm
+  stow xresources
 fi
 
 if [ $DESKTOP_SESSION == "i3" ]; then
@@ -32,20 +34,25 @@ if [ $DESKTOP_SESSION == "i3" ]; then
   sudo apt install compton
   # rofi as a sane dmenu alternative
   sudo apt install rofi
+  stow rofi
   # polybar as a sane i3bar alternative
   sudo apt install polybar
+  stow polybar
   # urvxt
   sudo apt install rxvt-unicode
+  stow urxvt
+  # mpv
+  sudo apt install mpv
   # dunst
-  firefox https://github.com/dunst-project/dunst
+  sudo apt install dunst
   # networkmanager_dmenu
   firefox https://github.com/firecat53/networkmanager-dmenu
   # install icomoon feather font
-  sudo gnome-font-viewer ~/dotfiles/polybar/.config/polybar/fontsicomoon-feather.ttf
   echo -e "\n===== Now you can stow the related stuff! =====\n"
   # install font awesome 5
   firefox https://github.com/FortAwesome/Font-Awesome
-  echo -e "Use gnome-font-viewer as for the icomoon feather font"
+  echo -e "Use gnome-font-viewer for the icomoon feather font (in polybar folder)"
+  echo -e "and the otfs of Font-Awesome"
   # To change fonts and GTK
   echo -e "Use lxappearance for changing GTK theme and icons"
   echo -e "Remember to set Wallpaper.png and Profile.png in ~/Pictures"

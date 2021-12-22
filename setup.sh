@@ -23,6 +23,10 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install tree
 fi
 
+read -p 'Do you want grub-customizer? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install grub-customizer
+fi
 read -p 'Do you want ssh? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install openssh-server
@@ -92,8 +96,7 @@ read -p 'Do you want conda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   wget -O ~/Downloads/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
   bash ~/Downloads/conda.sh
-  conda config --set auto_activate_base false
-  conda config --set changeps1 false
+  stow conda
   rm ~/Downloads/conda.sh
 fi
 
