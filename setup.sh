@@ -43,6 +43,11 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 fi
 
+read -p 'Do you want Visual Studio Code? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo snap install --classic code
+fi
+
 echo -e "===== Now we can stow the dotfiles! =====\n"
 
 read -p 'We need stow. Fine? [y/n]: ' answer
@@ -129,7 +134,7 @@ fi
 
 read -p 'Do you want Zotero? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  firefox https://www.zotero.org/download/
+  firefox https://github.com/retorquere/zotero-deb
   # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
   read -p 'Done? [y/n] ' otheranswer
 fi
