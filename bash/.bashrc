@@ -130,11 +130,13 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
 # export PS1="$bluebold\u$green\$(__git_ps1)$blue \W $ $reset"
-# export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch) $blue\W $reset"
-export PS1="$bluebold\u$green\$(__git_ps1)\$(parse_svn_branch)$greenbold\$(__conda_ps1) $blue\W $reset"
+export PS1="$bluebold\u$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
 
 ## Set default text editor
 export EDITOR='vim'
+
+## Add local/bin to PATH
+export PATH=$PATH:~/.local/bin
 
 ## Which computer am I using?
 if [ -f ~/dotfiles/host_specific/$HOSTNAME.sh ]; then

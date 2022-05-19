@@ -8,7 +8,7 @@ else
     if [ -f "/home/$USER/miniconda3/etc/profile.d/conda.sh" ]; then
         . "/home/$USER/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/$USER/miniconda3/bin:$PATH"
+        export PATH=$PATH:"/home/$USER/miniconda3/bin"
     fi
 fi
 unset __conda_setup

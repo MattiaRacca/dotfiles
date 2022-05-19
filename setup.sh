@@ -105,7 +105,7 @@ fi
 read -p 'Do you want Jupyter? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
     sudo apt install python3-pip
-    pip install notebook
+    pip install jupyter
     stow jupyter
 fi
 

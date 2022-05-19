@@ -5,8 +5,16 @@ alias xup='xrdb ~/.Xresources'
 alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
 alias juraout='ssh -XC mracca@login.idiap.ch'
 
-## TODO: add jupyter kernel commands
-# https://queirozf.com/entries/jupyter-kernels-how-to-add-change-remove
+## Add conda kernel to jupyter, while conda kernel is active
+function addjupyterkernel() {
+  pip install ipykernel
+  python -m ipykernel install --user --name=$CONDA_DEFAULT_ENV
+}
+
+function removejupyterkernel() {
+  jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
+}
+
 
 ## commands for letting know ROS where the roscore is running
 alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
@@ -23,7 +31,7 @@ alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
 alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
-alias jn='jupyter notebook'
+alias jn='jupyter-notebook'
 alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
 
@@ -173,18 +181,6 @@ function cd
              fi
          fi
      fi
-}
-
-# SVN Aliases - used by the changes in prompt
-parse_svn_branch() {
-    parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " (SVN)" }'
-}
-
-parse_svn_url() {
-  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
-}
-parse_svn_repository_root() {
-  svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
 }
 
 ## conda styling of Command prompt
