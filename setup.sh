@@ -104,9 +104,15 @@ fi
 
 read -p 'Do you want Jupyter? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-    sudo apt install python3-pip
-    pip install jupyter
-    stow jupyter
+  sudo apt install python3-pip
+  pip install jupyter
+  stow jupyter
+fi
+
+read -p 'Do you want to personalize Jupyter? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  pip install jupyterthemes
+  jt -t grade3 -fs 95 -tfs 11 -nfs 115 -cellw 88%
 fi
 
 read -p 'Do you want ROS Noetic? [y/n]: ' noetic
