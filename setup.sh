@@ -145,7 +145,10 @@ fi
 read -p 'Do you want Zotero? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   firefox https://github.com/retorquere/zotero-deb
+  wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
   # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
   read -p 'Done? [y/n] ' otheranswer
+  sudo apt update
+  sudo apt install zotero
 fi
 
