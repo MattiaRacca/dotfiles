@@ -3,9 +3,9 @@ I use [GNU Stow](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-ma
 ```bash
 stow vim
 ```
-Script ``setup.sh`` installs programs and utilities I usually want.
+Script ``setup.sh`` installs programs and utilities I usually need.
 
-## i3wm setup (not up-to-date)
+## i3wm setup (not mantained)
 Script ``rice.sh`` installs themes and icons plus the i3wm-related packages I currently use (see i3wm `config`).
 - [i3-gaps](https://github.com/Airblader/i3) ([speed-ricer ppa](https://launchpad.net/~kgilmer/+archive/ubuntu/speed-ricer))
 - [polybar](https://github.com/polybar/polybar) ([speed-ricer ppa](https://launchpad.net/~kgilmer/+archive/ubuntu/speed-ricer))
