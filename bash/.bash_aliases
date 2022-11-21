@@ -2,8 +2,8 @@
 alias xup='xrdb ~/.Xresources'
 
 ## SSH into IDIAP workstation
-alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
-alias juraout='ssh -XC mracca@login.idiap.ch'
+# alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
+# alias juraout='ssh -XC mracca@login.idiap.ch'
 
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
@@ -15,6 +15,8 @@ function removejupyterkernel() {
   jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
 }
 
+## Python: my minimal cookiecutter
+alias mycookiecutter='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
 
 ## commands for letting know ROS where the roscore is running
 alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
