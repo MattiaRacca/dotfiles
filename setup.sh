@@ -4,21 +4,9 @@
 
 echo -e "===== This script installs programs I usually need =====\n"
 
-read -p 'Gonna sudo apt update here. Fine? [y/n]' answer
-if [ "$answer" = y -o -z "$answer" ];then
-  sudo apt update
-else
-  echo "Well, thought luck..."
-  exit 2
-fi
-
-read -p 'We need stow. Fine? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install stow
-else
-  echo "Well, no dotfiles then..."
-  exit 2
-fi
+sudo apt update
+echo -e "installing stow "
+sudo apt install stow
 
 echo -e "\n===== Terminal related stuff =====\n"
 
@@ -123,6 +111,18 @@ if [ "$noetic" = "y" -o -z "$noetic" ];then
   sudo apt install ros-noetic-desktop-full
   sudo rosdep init
   rosdep update
+fi
+
+read -p 'Do you want ROS2 Foxy? [y/n]: ' foxy
+if [ "$foxy" = "y" -o -z "$foxy" ];then
+  sudo apt install software-properties-common
+  sudo add-apt-repository universe
+  sudo apt update && sudo apt install curl
+  sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+  sudo apt update
+  sudo apt install ros-foxy-desktop python3-argcomplete
+  sudo apt install ros-dev-tools
 fi
 
 read -p 'Do you want TeXlive-full? [y/n]: ' answer
