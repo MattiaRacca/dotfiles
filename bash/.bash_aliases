@@ -42,9 +42,15 @@ function devel() {
   orange='\033[0;33m'
   orangebold='\033[1;33m'
   reset='\033[0m'
+  echo -e Sourcing the workspace $orangebold\($ROS_DISTRO\)$reset
+  if [ "$ROS_VERSION" -gt 1 ]
+  then
+  source install/setup.bash
+  echo -e ${orange}DOMAIN_ID=$ROS_DOMAIN_ID
+  else
   source devel/setup.bash
-  echo -e $orangebold$ROS_DISTRO$reset
   echo -e $orange$ROS_PACKAGE_PATH
+  fi
 }
 
 # simple Bluetooth (dis)connect from command line
