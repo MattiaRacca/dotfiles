@@ -5,6 +5,10 @@ alias xup='xrdb ~/.Xresources'
 # alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
 # alias juraout='ssh -XC mracca@login.idiap.ch'
 
+## SSHFS into NLE scratch
+alias myscratch='sshfs chaos-03:/scratch/2/user/mracca ~/Mounts/scratch'
+alias mybox='sshfs box-01:/home/mracca/dwp_project ~/Mounts/dwp_project'
+
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
   pip install ipykernel
