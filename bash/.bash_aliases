@@ -1,9 +1,8 @@
 ## alias for Xresources
 alias xup='xrdb ~/.Xresources'
 
-## SSH into IDIAP workstation
-# alias jurain='ssh -XC mracca@jurasix23.idiap.ch'
-# alias juraout='ssh -XC mracca@login.idiap.ch'
+## SSH into NLE workstation
+alias huge='ssh -XC mracca@huge'
 
 ## SSHFS into NLE scratch
 alias myscratch='sshfs chaos-03:/scratch/2/user/mracca ~/Mounts/scratch'
