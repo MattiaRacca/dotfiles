@@ -39,6 +39,7 @@ alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter-notebook'
 alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
+alias clera='clear'  # dislexia help
 
 ## ROS "source devel/setup.bash" function that outputs a bunch of useful info
 function devel() {

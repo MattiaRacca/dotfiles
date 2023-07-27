@@ -1,5 +1,5 @@
 ### NLE HRI team Desktop
-purplebold="\e[1;35m"
+purplebold="\[\033[1;35m\]"
 export PS1="$purplebold\u@HUGE$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
 
 ## CONDA
