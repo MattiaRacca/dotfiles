@@ -1,0 +1,60 @@
+{
+    "git.confirmSync": false,
+    "pylint.args": [
+        "--disable=C0114,C0115,C0116",
+        "--generated-members=numpy.* ,torch.*"
+    ],
+    "python.languageServer": "Pylance",
+    "python.analysis.typeCheckingMode": "basic",
+    "autopep8.args": [
+        "--ignore",
+        "E402"
+    ],
+    "python.defaultInterpreterPath": "/bin/python",
+    "jupyter.askForKernelRestart": false,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        100,
+        120
+    ],
+    "editor.fontSize": 16,
+    "editor.lightbulb.enabled": false,
+    "editor.minimap.enabled": true,
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "terminal.integrated.inheritEnv": false,
+    "window.menuBarVisibility": "toggle",
+    "files.autoSave": "onWindowChange",
+    "errorLens.gutterIconsEnabled": true,
+    "errorLens.enabledDiagnosticLevels": [
+        "error",
+        "warning",
+        "hint"
+    ],
+    "errorLens.messageBackgroundMode": "none",
+    "explorer.confirmDelete": false,
+    "workbench.startupEditor": "none",
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "workbench.editorAssociations": {
+        "*.pdf": "default"
+    },
+    "cSpell.userWords": [
+        "astype",
+        "coolwarm",
+        "imread",
+        "linalg",
+        "ndarray",
+        "ndim",
+        "pyplot",
+        "rototranslation"
+    ],
+    "git.autofetch": true,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "r.rpath.linux": "/home/mracca/miniconda3/envs/r_adaptive_sound/bin/R",
+    "python.autoComplete.extraPaths": [],
+    "python.analysis.extraPaths": []
+}
