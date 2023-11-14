@@ -1,13 +1,6 @@
 ## alias for Xresources
 alias xup='xrdb ~/.Xresources'
 
-## SSH into NLE workstation
-alias huge='ssh -XC mracca@huge'
-
-## SSHFS into NLE scratch
-alias myscratch='sshfs chaos-03:/scratch/2/user/mracca ~/Mounts/scratch'
-alias mybox='sshfs box-01:/home/mracca/dwp_project ~/Mounts/dwp_project'
-
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
   pip install ipykernel

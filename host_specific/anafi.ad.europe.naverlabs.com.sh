@@ -1,5 +1,15 @@
 ### My NLE laptop
 
+## SSHFS into NLE scratch
+alias myscratch='sshfs chaos-03:/scratch/2/user/mracca ~/Mounts/scratch'
+alias mybox='sshfs box-01:/home/mracca/dwp_project ~/Mounts/dwp_project'
+alias myhuge='sshfs huge:/home/mracca/Projects/DynamicWaitingPose ~/Mounts/dwp_on_huge'
+alias myhugefromhome="sshfs huge:/home/mracca/Projects/DynamicWaitingPose ~/Mounts/dwp_on_huge -o ssh_command='ssh -J 10.57.0.12'"
+
+## SSH tunnels for Tensorboard on office desktop (huge)
+alias hugetb='ssh -L 16006:127.0.0.1:6006 mracca@huge'
+alias hugetb_fromhome='ssh -L 16006:127.0.0.1:6006 mracca@hugefromhome'
+
 ## ROS2
 function rosup () {
     source /opt/ros/foxy/setup.bash
