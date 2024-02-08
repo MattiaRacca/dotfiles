@@ -1,7 +1,7 @@
 ### My NLE laptop
 
 ## SSHFS into NLE scratch
-alias myscratch='sshfs chaos-03:/scratch/2/user/mracca ~/Mounts/scratch'
+alias myscratch='sshfs chaos-01:/scratch/2/user/mracca ~/Mounts/scratch'
 alias mybox='sshfs box-01:/home/mracca/dwp_project ~/Mounts/dwp_project'
 alias myhuge='sshfs huge:/home/mracca/Projects/DynamicWaitingPose ~/Mounts/dwp_on_huge'
 alias myhugefromhome="sshfs huge:/home/mracca/Projects/DynamicWaitingPose ~/Mounts/dwp_on_huge -o ssh_command='ssh -J 10.57.0.12'"
