@@ -1,6 +1,6 @@
-### NLE HRI Desktop
-purplebold="\[\033[1;35m\]"
-export PS1="$purplebold\u@HUGE$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
+### NLE HRI Simulation Desktop
+cyan="\[\e[1;93m\]"
+export PS1="$cyan\u@SIPLE$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
 
 ## CONDA
 # >>> conda initialize >>>

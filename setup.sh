@@ -39,7 +39,6 @@ echo -e "===== GNOME stuff setup =====\n"
 read -p 'gnome terminal settings? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   dconf load /org/gnome/terminal/legacy/profiles:/ < ~/dotfiles/gnome-terminal/ukiyoe.dconf
-  sudo apt install gedit-plugins
 fi
 
 read -p 'Gedit settings? [y/n]: ' answer
@@ -78,10 +77,9 @@ echo -e "\n===== Work related stuff =====\n"
 
 read -p 'Do you want Visual Studio Code? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  firefox https://code.visualstudio.com/docs/?dv=linux64_deb
-  read -p 'Downloaded the .deb? [y/n]: ' answer
-  sudo apt install ~/Downloads/code*.deb
-  rm ~/Downloads/code*.deb
+  wget -O ~/Downloads/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+  sudo apt install ~/Downloads/code.deb
+  rm ~/Downloads/code.deb
 fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
