@@ -57,5 +57,9 @@
     "r.rpath.linux": "/home/mracca/miniconda3/envs/r_adaptive_sound/bin/R",
     "python.autoComplete.extraPaths": [],
     "python.analysis.extraPaths": [],
-    "cSpell.enabled": false
+    "cSpell.enabled": false,
+    "cmake.showOptionsMovedNotification": false,
+    "settingsSync.ignoredExtensions": [
+        "ms-iot.vscode-ros"
+    ]
 }

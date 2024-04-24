@@ -7,6 +7,19 @@ function addjupyterkernel() {
   python -m ipykernel install --user --name=$CONDA_DEFAULT_ENV
 }
 
+## Work and Personal Github
+function workgit() {
+    git config --local user.name "mattia-racca"
+    git config --local user.email "mattia.racca@naverlabs.com"
+    git config --local --list
+}
+
+function mygit() {
+    git config --local user.name "MattiaRacca"
+    git config --local user.email "mattia.rh@gmail.com"
+    git config --local --list
+}
+
 function removejupyterkernel() {
   jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
 }
