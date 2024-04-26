@@ -16,7 +16,7 @@ function rosup () {
 
     # GAZEBO
     export TURTLEBOT3_MODEL=waffle
-    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/$ROS_DISTRO/share/turtlebot3_gazebo/models:$HOME/elevator_ws/install/elevator_sim/share/elevator_sim/resource/models
+    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/$ROS_DISTRO/share/turtlebot3_gazebo/models:$HOME/elevator_ws/install/elevator_sim/share/elevator_sim/resource/models:$HOME/elevator_ws/install/around_description/share
     # echo to confirm
     orange='\033[0;33m'
     orangebold='\033[1;33m'
