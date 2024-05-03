@@ -93,7 +93,7 @@ fi
 read -p 'Do you want Jupyter? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install python3-pip
-  pip install jupyter
+  pip install "notebook<7.0.0"
 fi
 
 read -p 'Do you want to personalize Jupyter? [y/n]: ' answer
