@@ -45,5 +45,13 @@
     {
         "key": "ctrl+k ctrl+'",
         "command": "editor.unfoldRecursively"
+    },
+    {
+        "key": "ctrl+k ctrl+t",
+        "command": "-workbench.action.selectTheme"
+    },
+    {
+        "key": "ctrl+k ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal"
     }
 ]
