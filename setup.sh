@@ -1,5 +1,5 @@
 #!/bin/bash
-# A simple install script for Ubuntu 20.04
+# A simple install script for Ubuntu 22.04
 # Mattia Racca
 
 echo -e "\n===== Fresh installation =====\n"
@@ -56,11 +56,6 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   bash ~/.dropbox-dist/dropboxd
 fi
 
-read -p 'Do you want Nordvpn? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
-fi
-
 echo -e "===== GIT account setup =====\n"
 
 read -p 'Do you want git account? [y/n]: ' answer
@@ -88,29 +83,6 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   bash ~/Downloads/conda.sh
   stow conda
   rm ~/Downloads/conda.sh
-fi
-
-read -p 'Do you want Jupyter? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install python3-pip
-  pip install "notebook<7.0.0"
-fi
-
-read -p 'Do you want to personalize Jupyter? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  pip install jupyterthemes
-  jt -t grade3 -fs 95 -tfs 11 -nfs 115 -cellw 88%
-  stow jupyter
-fi
-
-read -p 'Do you want ROS Noetic? [y/n]: ' noetic
-if [ "$noetic" = "y" -o -z "$noetic" ];then
-  sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-  curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-  sudo apt update
-  sudo apt install ros-noetic-desktop-full
-  sudo rosdep init
-  rosdep update
 fi
 
 read -p 'Do you want ROS2 Foxy? [y/n]: ' foxy
@@ -150,4 +122,16 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   # to change the icon, write simply Icon=zotero in ~/.local/share/applications/zotero.desktop
   sudo apt update
   sudo apt install zotero
+fi
+
+echo -e "===== Editing Software =====\n"
+
+read -p 'Do you want Gimp? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install gimp
+fi
+
+read -p 'Do you want Inkscape? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install inkscape
 fi
