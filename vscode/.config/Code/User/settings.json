@@ -52,7 +52,8 @@
     ],
     "git.autofetch": true,
     "[python]": {
-        "editor.formatOnType": true
+        "editor.formatOnType": true,
+        "diffEditor.ignoreTrimWhitespace": false
     },
     "r.rpath.linux": "/home/mracca/miniconda3/envs/r_adaptive_sound/bin/R",
     "python.autoComplete.extraPaths": [],
@@ -61,5 +62,11 @@
     "cmake.showOptionsMovedNotification": false,
     "settingsSync.ignoredExtensions": [
         "ms-iot.vscode-ros"
+    ],
+    "ros.distro": "foxy",
+    "diffEditor.renderSideBySide": true,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
     ]
 }

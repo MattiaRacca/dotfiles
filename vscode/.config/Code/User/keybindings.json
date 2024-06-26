@@ -4,28 +4,9 @@
         "command": "editor.fold"
     },
     {
-        "key": "ctrl+[Period]",
-        "command": "python.execInTerminal"
-    },
-    {
         "key": "ctrl+shift+[Period]",
         "command": "-breadcrumbs.focus",
         "when": "breadcrumbsPossible"
-    },
-    {
-        "key": "ctrl+[Period]",
-        "command": "-editor.action.quickFix",
-        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+[Period]",
-        "command": "-problems.action.showQuickFixes",
-        "when": "problemFocus"
-    },
-    {
-        "key": "ctrl+shift",
-        "command": "workbench.action.terminal.openNativeConsole",
-        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+shift+c",
@@ -53,5 +34,44 @@
     {
         "key": "ctrl+k ctrl+t",
         "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "shift+s",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "notebook.clearAllCellsOutputs",
+                "notebook.focusTop"
+            ]
+        },
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+    },
+    {
+        "key": "r r",
+        "command": "jupyter.restartkernelandrunallcells",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+    },
+    {
+        "key": "0 0",
+        "command": "runCommands",
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'",
+        "args": {
+            "commands": [
+                "jupyter.restartkernel",
+                "notebook.clearAllCellsOutputs",
+                "notebook.focusTop"
+            ]
+        },
+    },
+    {
+        "key": "shift+e",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "notebook.revealLastFailedCell",
+                "notebook.revealRunningCell"
+            ]
+        },
+        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
     }
 ]
