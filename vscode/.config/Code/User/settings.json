@@ -55,7 +55,6 @@
         "editor.formatOnType": true,
         "diffEditor.ignoreTrimWhitespace": false
     },
-    "r.rpath.linux": "/home/mracca/miniconda3/envs/r_adaptive_sound/bin/R",
     "python.autoComplete.extraPaths": [],
     "python.analysis.extraPaths": [],
     "cSpell.enabled": false,
@@ -63,10 +62,15 @@
     "settingsSync.ignoredExtensions": [
         "ms-iot.vscode-ros"
     ],
-    "ros.distro": "foxy",
+    "ros.distro": "humble",
     "diffEditor.renderSideBySide": true,
     "jupyter.widgetScriptSources": [
         "jsdelivr.com",
         "unpkg.com"
-    ]
+    ],
+    "notebook.editorOptionsCustomizations": {
+        "editor.tabSize": 4,
+        "editor.indentSize": 4,
+        "editor.insertSpaces": true
+    }
 }

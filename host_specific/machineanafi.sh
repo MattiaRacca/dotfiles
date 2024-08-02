@@ -15,8 +15,8 @@ alias hugetb_fromhome='ssh -L 16006:127.0.0.1:6006 mracca@hugefromhome'
 
 ## ROS2
 function rosup () {
-    source /opt/ros/foxy/setup.bash
-    export ROS_DOMAIN_ID=25
+    source /opt/ros/humble/setup.bash
+    export ROS_DOMAIN_ID=185
 
     # for colcon_cd
     source /usr/share/colcon_cd/function/colcon_cd.sh
@@ -26,8 +26,7 @@ function rosup () {
     source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 
     # GAZEBO
-    export TURTLEBOT3_MODEL=waffle
-    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/$ROS_DISTRO/share/turtlebot3_gazebo/models:$HOME/elevator_ws/src/elevator_sim/navbot_simulation/models
+    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$HOME/elevator_ws/install/elevator_sim/share/elevator_sim/resource/models:$HOME/elevator_ws/install/around_description/share
 }
 
 ## CONDA
