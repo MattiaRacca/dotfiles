@@ -85,7 +85,7 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   rm ~/Downloads/conda.sh
 fi
 
-read -p 'Do you want ROS2 Foxy? [y/n]: ' foxy
+read -p 'Do you want ROS2 Humble? [y/n]: ' foxy
 if [ "$foxy" = "y" -o -z "$foxy" ];then
   sudo apt install software-properties-common
   sudo add-apt-repository universe
@@ -93,7 +93,7 @@ if [ "$foxy" = "y" -o -z "$foxy" ];then
   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
   sudo apt update
-  sudo apt install ros-foxy-desktop python3-argcomplete
+  sudo apt install ros-humble-desktop python3-argcomplete
   sudo apt install ros-dev-tools
 fi
 
@@ -105,6 +105,25 @@ else
   if [ "$latexacc" = "y" -o -z "$latexacc" ];then
     sudo apt install texlive texlive-fonts-extra texlive-science
   fi
+fi
+
+read -p 'Do you want Docker? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+	# Add Docker's official GPG key:
+	sudo apt-get update
+	sudo apt-get install ca-certificates curl
+	sudo install -m 0755 -d /etc/apt/keyrings
+	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+	sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+	# Add the repository to Apt sources:
+	echo \
+	  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+	  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+	  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt-get update
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+        sudo usermod -aG docker $USER
 fi
 
 read -p 'Do you want Zoom? [y/n]: ' answer

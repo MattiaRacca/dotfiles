@@ -7,6 +7,10 @@ function addjupyterkernel() {
   python -m ipykernel install --user --name=$CONDA_DEFAULT_ENV
 }
 
+function removejupyterkernel() {
+  jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
+}
+
 ## Work and Personal Github
 function workgit() {
     git config --local user.name "mattia-racca"
@@ -30,22 +34,8 @@ git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
     done
 }
 
-function removejupyterkernel() {
-  jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
-}
-
 ## Python: my minimal cookiecutter
 alias mycookiecutter='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
-
-## commands for letting know ROS where the roscore is running
-alias localmaster='export ROS_MASTER_URI=http://localhost:11311'
-
-## commands for the Franka Panda
-alias pandarecover='rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"'
-
-## commands for RQT
-# rqtreset: when rqt refuses to find controller that are already installed
-alias rqtreset='rm ~/.config/ros.org/rqt_gui.ini && rqt'
 
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
@@ -70,6 +60,21 @@ function devel() {
   else
   source devel/setup.bash
   echo -e $orange$ROS_PACKAGE_PATH
+  fi
+}
+
+## ROS clean shortcut for ros2 run tf2_tools viewframes
+function viewtf() {
+  orangebold='\033[1;33m'
+  reset='\033[0m'
+  if [ -z "$ROS_DISTRO" ]
+  then
+    echo -e $orangebold\ROS is not up!$reset
+  else
+    cd /tmp
+    ros2 run tf2_tools view_frames -o frames
+    evince frames.pdf >/dev/null &
+    cd - >/dev/null
   fi
 }
 
