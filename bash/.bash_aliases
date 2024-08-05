@@ -1,6 +1,3 @@
-## alias for Xresources
-alias xup='xrdb ~/.Xresources'
-
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
   pip install ipykernel
@@ -46,6 +43,23 @@ alias jn='jupyter-notebook'
 alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
 alias clera='clear'  # dislexia help
+
+## disk usage function (current folder only, subfolders and files, color coded)
+function duh() {
+  local dir=${1:-.}
+  local blue='\033[0;34m'
+  local green='\033[0;32m'
+  local nc='\033[0m' # No Color
+
+  # Get the disk usage and format it
+  du -ah --max-depth=1 "$dir" | while read size item; do
+    if [ -d "$item" ]; then
+      echo -e "${blue}${size}\t${item}${nc}"
+    else
+      echo -e "${green}${size}\t${item}${nc}"
+    fi
+  done
+}
 
 ## ROS "source devel/setup.bash" function that outputs a bunch of useful info
 function devel() {
