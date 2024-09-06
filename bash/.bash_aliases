@@ -44,6 +44,10 @@ alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
 alias clera='clear'  # dislexia help
 
+function psgrep() {
+  ps aux | grep $1
+}
+
 ## disk usage function (current folder only, subfolders and files, color coded)
 function duh() {
   local dir=${1:-.}

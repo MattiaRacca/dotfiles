@@ -73,5 +73,10 @@
             ]
         },
         "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+    },
+    {
+        "key": "ctrl+k ctrl+0",
+        "command": "workbench.files.action.collapseExplorerFolders",
+        "when": "filesExplorerFocus"
     }
 ]
