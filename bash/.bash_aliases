@@ -42,7 +42,8 @@ alias :wq='echo This is not Vim you silly fool'
 alias jn='jupyter-notebook'
 alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
-alias clera='clear'  # dislexia help
+alias clear='clear -x'
+alias clera='clear -x'  # dislexia help
 
 function psgrep() {
   ps aux | grep $1
