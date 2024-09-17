@@ -7,7 +7,7 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "80:80/tcp"
+      - "8080:80/tcp"
     environment:
       TZ: 'Europe/Rome'
       # WEBPASSWORD: 'set a secure password here or it will be random'
