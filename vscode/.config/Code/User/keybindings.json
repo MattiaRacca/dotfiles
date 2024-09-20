@@ -1,7 +1,8 @@
 [
     {
         "key": "ctrl+k ctrl+[Equal]",
-        "command": "editor.fold"
+        "command": "editor.fold",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+shift+[Period]",
@@ -25,7 +26,8 @@
     },
     {
         "key": "ctrl+k ctrl+'",
-        "command": "editor.unfoldRecursively"
+        "command": "editor.unfoldRecursively",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+k ctrl+t",
@@ -33,7 +35,8 @@
     },
     {
         "key": "ctrl+k ctrl+t",
-        "command": "workbench.action.terminal.toggleTerminal"
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "!terminalFocus"
     },
     {
         "key": "shift+s",
@@ -78,5 +81,10 @@
         "key": "ctrl+k ctrl+0",
         "command": "workbench.files.action.collapseExplorerFolders",
         "when": "filesExplorerFocus"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "markdown.extension.editing.toggleCodeSpan",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
     }
 ]
