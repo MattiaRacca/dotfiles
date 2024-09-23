@@ -49,6 +49,35 @@ function psgrep() {
   ps aux | grep $1
 }
 
+# download youtube playlist with yt-dlp
+function downlist() {
+  CURRENT_DIR=$(pwd)
+
+  # Check if the first argument is provided
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Please provide a folder name and playlist url."
+    exit 1
+  fi
+
+  # Create a new directory in ~/Downloads using the name from $1
+  NEW_DIR="$HOME/Downloads/$1"
+  mkdir -p "$NEW_DIR"
+
+  cd /tmp
+  mkcd "$1"
+
+  yt-dlp -f 140 -x $2
+  for f in *.m4a; do
+    if [ -f "$f" ]; then  # Check if the file exists
+      ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 "$NEW_DIR/${f%.m4a}.mp3"
+    else
+      echo "No .m4a files found in the directory."
+    fi
+  done
+
+  cd "$CURRENT_DIR"
+}
+
 ## disk usage function (current folder only, subfolders and files, color coded)
 function duh() {
   local dir=${1:-.}
