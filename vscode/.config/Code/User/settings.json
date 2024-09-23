@@ -1,13 +1,8 @@
 {
-    "[python]": {
-        "diffEditor.ignoreTrimWhitespace": false,
-        "editor.formatOnType": true
-    },
     "autopep8.args": [
         "--ignore",
         "E402"
     ],
-    "diffEditor.renderSideBySide": true,
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
     "editor.lightbulb.enabled": "off",
@@ -19,8 +14,7 @@
     ],
     "errorLens.enabledDiagnosticLevels": [
         "error",
-        "warning",
-        "hint"
+        "warning"
     ],
     "errorLens.gutterIconsEnabled": true,
     "errorLens.messageBackgroundMode": "none",
@@ -32,29 +26,17 @@
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     "jupyter.askForKernelRestart": false,
-    "jupyter.widgetScriptSources": [
-        "jsdelivr.com",
-        "unpkg.com"
-    ],
-    "notebook.editorOptionsCustomizations": {
-        "editor.indentSize": 4,
-        "editor.insertSpaces": true,
-        "editor.tabSize": 4
-    },
+    "notebook.defaultFormatter": "ms-python.autopep8",
+    "notebook.formatOnSave.enabled": true,
     "pylint.args": [
         "--disable=C0114,C0115,C0116",
         "--generated-members=numpy.*, torch.*, cairo"
     ],
-    "python.analysis.extraPaths": [],
     "python.analysis.typeCheckingMode": "off",
-    "python.autoComplete.extraPaths": [],
     "python.languageServer": "Pylance",
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "terminal.integrated.inheritEnv": false,
     "window.menuBarVisibility": "toggle",
-    "workbench.colorTheme": "Default Dark+",
-    "workbench.editorAssociations": {
-        "*.pdf": "default"
-    },
+    "window.newWindowProfile": "Default",
     "workbench.startupEditor": "none"
 }

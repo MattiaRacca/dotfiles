@@ -79,7 +79,7 @@ fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
+  wget -O ~/Downloads/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
   bash ~/Downloads/conda.sh
   stow conda
   rm ~/Downloads/conda.sh
