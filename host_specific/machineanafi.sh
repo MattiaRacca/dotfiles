@@ -151,6 +151,7 @@ tensortunnel () {
         tunnel_cmd=${tunnel_cmd}${from_home_append}
     fi
     echo "Running $tunnel_cmd"
+    echo "Afterwards you should run tensorboard --logdir=/path/to/logs"
     eval "$tunnel_cmd"
 }
 

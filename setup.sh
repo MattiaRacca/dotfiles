@@ -15,12 +15,9 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   stow bash
 fi
 
-read -p 'Do you want curl/tree/htop/ssh? [y/n]: ' answer
+read -p 'Do you want curl/tree/htop/ssh/screen? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install curl  # for vim plugins
-  sudo apt install tree
-  sudo apt install htop
-  sudo apt install openssh-server
+  sudo apt install curl tree htop openssh-server screen
 fi
 
 read -p 'Do you want vim? [y/n]: ' answer

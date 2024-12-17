@@ -31,6 +31,12 @@ git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
     done
 }
 
+## .webm to .gif
+webm2gif() {
+  ffmpeg -y -i "$1" -vf palettegen /tmp/palette.png
+  ffmpeg -y -i "$1" -i /tmp/palette.png -filter_complex paletteuse -r 10 "${1%.*}.gif"
+}
+
 ## Python: my minimal cookiecutter
 alias mycookiecutter='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
 
