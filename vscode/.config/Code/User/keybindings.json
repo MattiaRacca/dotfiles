@@ -35,8 +35,7 @@
     },
     {
         "key": "ctrl+k ctrl+t",
-        "command": "workbench.action.terminal.toggleTerminal",
-        "when": "!terminalFocus"
+        "command": "workbench.action.terminal.toggleTerminal"
     },
     {
         "key": "shift+s",
@@ -47,17 +46,17 @@
                 "notebook.focusTop"
             ]
         },
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "r r",
         "command": "jupyter.restartkernelandrunallcells",
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "0 0",
         "command": "runCommands",
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'",
         "args": {
             "commands": [
                 "jupyter.restartkernel",
@@ -75,7 +74,7 @@
                 "notebook.revealRunningCell"
             ]
         },
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "ctrl+k ctrl+0",

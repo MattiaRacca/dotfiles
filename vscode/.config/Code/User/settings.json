@@ -22,8 +22,6 @@
     "files.autoSave": "onWindowChange",
     "git.autofetch": true,
     "git.confirmSync": false,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     "jupyter.askForKernelRestart": false,
     "notebook.defaultFormatter": "ms-python.autopep8",
@@ -38,5 +36,19 @@
     "terminal.integrated.inheritEnv": false,
     "window.menuBarVisibility": "toggle",
     "window.newWindowProfile": "Default",
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "gitlens.currentLine.pullRequests.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.hovers.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "gitlens.gitCommands.skipConfirmations": [
+        "fetch:command",
+        "stash-push:command",
+        "push:command"
+    ]
 }
