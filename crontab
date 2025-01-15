@@ -1,0 +1,5 @@
+PATH=/bin:/usr/bin:/usr/local/bin
+XDG_RUNTIME_DIR=/run/user/1000
+
+@reboot sleep 120; nohup mopidy >> /home/pi/.data/mopidy/mopidy.log 2>&1 &
+0 0 * * * mopidy local scan >> /home/pi/.data/mopidy/local_scan.log 2>&1
