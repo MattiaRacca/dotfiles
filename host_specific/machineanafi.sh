@@ -11,7 +11,8 @@ rosup () {
     # for colcon_cd
     source /usr/share/colcon_cd/function/colcon_cd.sh
     export _colcon_cd_root=/opt/ros/$ROS_DISTRO/
-
+    #export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
     # for colcon autocompletion
     source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 
@@ -31,7 +32,7 @@ easymounts() {
     mount_name=""
     from_home_flag=0
     mount_points_folder="~/Mounts"
-    available_mounts=("siple" "d005sarn" "huge")
+    available_mounts=("siple" "d005sarn" "huge" "homepi")
 
     while [[ "$1" != "" ]]; do
         case $1 in
@@ -86,6 +87,12 @@ easymounts() {
             remote_dir="/home/mracca/Projects/DynamicWaitingPose"
             local_mount_point="/dwp_on_huge"
             ;;
+        homepi )
+            remote_user="pi"
+            remote_host="192.168.1.194"
+            remote_dir="/home/pi/Sharedrive"
+            local_mount_point="/raspberrypi_sharedrive"
+            ;;
         * )
             echo "Unknown mount name: $mount_name"
             echo "Available mount names:"
@@ -98,7 +105,7 @@ easymounts() {
 
     # Build the SSHFS command
     sshfs_cmd="sshfs ${remote_user}@${remote_host}:${remote_dir} ${mount_points_folder}${local_mount_point}"
-    sshfs_extra_jump="-o ssh_command='ssh -J 10.57.0.12'"
+    sshfs_extra_jump="-o ssh_command='ssh -J wood'"
 
     # Append reconnect option if -r is passed
     if [[ $from_home_flag -eq 1 ]]; then
@@ -144,6 +151,7 @@ tensortunnel () {
         tunnel_cmd=${tunnel_cmd}${from_home_append}
     fi
     echo "Running $tunnel_cmd"
+    echo "Afterwards you should run tensorboard --logdir=/path/to/logs"
     eval "$tunnel_cmd"
 }
 

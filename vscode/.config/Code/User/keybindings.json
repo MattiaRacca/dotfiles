@@ -1,7 +1,8 @@
 [
     {
         "key": "ctrl+k ctrl+[Equal]",
-        "command": "editor.fold"
+        "command": "editor.fold",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+shift+[Period]",
@@ -25,7 +26,8 @@
     },
     {
         "key": "ctrl+k ctrl+'",
-        "command": "editor.unfoldRecursively"
+        "command": "editor.unfoldRecursively",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+k ctrl+t",
@@ -44,17 +46,17 @@
                 "notebook.focusTop"
             ]
         },
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "r r",
         "command": "jupyter.restartkernelandrunallcells",
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "0 0",
         "command": "runCommands",
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'",
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'",
         "args": {
             "commands": [
                 "jupyter.restartkernel",
@@ -72,11 +74,16 @@
                 "notebook.revealRunningCell"
             ]
         },
-        "when": "notebookEditorFocused && !inputFocus && !notebookOutputFocused && activeEditor == 'workbench.editor.notebook'"
+        "when": "notebookEditorFocused && !inputFocus && activeEditor == 'workbench.editor.notebook'"
     },
     {
         "key": "ctrl+k ctrl+0",
         "command": "workbench.files.action.collapseExplorerFolders",
         "when": "filesExplorerFocus"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "markdown.extension.editing.toggleCodeSpan",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
     }
 ]
