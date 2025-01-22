@@ -38,19 +38,24 @@ webm2gif() {
 }
 
 ## Python: my minimal cookiecutter
-alias mycookiecutter='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
+alias newpythonproject='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
 
 ## miscellanea
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
 alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
-alias jn='jupyter-notebook'
-alias github='git remote get-url origin | xargs firefox'
+# alias jn='jupyter-notebook'
 alias re='exec bash'
 alias clear='clear -x'
-alias clera='clear -x'  # dislexia help
 
+## dislexia helpers
+alias clera='clear -x'
+alias sl='ls'
+alias exot='exit'
+
+
+## Shorthand for ps aux | grep <something>
 function psgrep() {
   ps aux | grep $1
 }

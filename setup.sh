@@ -82,6 +82,11 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   rm ~/Downloads/conda.sh
 fi
 
+read -p 'Do you want Cookiecutter? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install cookiecutter
+fi
+
 read -p 'Do you want ROS2 Humble? [y/n]: ' foxy
 if [ "$foxy" = "y" -o -z "$foxy" ];then
   sudo apt install software-properties-common

@@ -112,7 +112,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Enable tab completion
+# Enable tab completion for git commands
 source ~/.git-completion.bash
 
 # colors!
