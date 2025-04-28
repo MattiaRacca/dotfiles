@@ -116,11 +116,14 @@ function devel() {
   then
   source install/setup.bash
   echo -e ${orange}DOMAIN_ID=$ROS_DOMAIN_ID
+  echo -e ${orange}RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION
   else
   source devel/setup.bash
   echo -e $orange$ROS_PACKAGE_PATH
   fi
 }
+
+alias cbd='colcon build && devel'
 
 ## ROS clean shortcut for ros2 run tf2_tools viewframes
 function viewtf() {
