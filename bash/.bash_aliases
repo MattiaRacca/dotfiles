@@ -1,3 +1,22 @@
+# List of your custom commands
+declare -A MY_COMMANDS=(
+  [workgit]="Sets up folder to be under work git account"
+  [mygit]="Sets up folder to be under personal git account"
+  [newpythonproject]="Python Cookiecutter"
+  [duh]="Disk Usage for Humans"
+  [viewtf]="ros2 run tf2_tools viewframes"
+  [easymounts]="SSHFS into various machine from NLE laptop"
+  [tensortunnel]="SSH tunnel for tensorboard from NLE laptop"
+)
+
+function mycommands() {
+  openformat="\033[1;32m"
+  closeformat="\033[0m"
+  for cmd in "${!MY_COMMANDS[@]}"; do
+    printf "${openformat} %-20s ${closeformat} - %s\n" "$cmd" "${MY_COMMANDS[$cmd]}"
+  done
+}
+
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
   pip install ipykernel
