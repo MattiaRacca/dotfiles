@@ -85,5 +85,29 @@
         "key": "ctrl+e",
         "command": "markdown.extension.editing.toggleCodeSpan",
         "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "-notebook.cell.insertCodeCellAbove",
+        "when": "notebookCellListFocused && !inputFocus"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "-editor.action.insertLineBefore",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+enter",
+        "command": "python.execInTerminal-icon"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-github.copilot.generate",
+        "when": "editorTextFocus && github.copilot.activated && !commentEditorFocused && !inInteractiveInput && !interactiveEditorFocused"
+    },
+    {
+        "key": "ctrl+a",
+        "command": "-notebook.cell.output.selectAll",
+        "when": "notebookEditorFocused && notebookOutputFocused"
     }
 ]

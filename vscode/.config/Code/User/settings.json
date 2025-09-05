@@ -1,7 +1,9 @@
 {
     "autopep8.args": [
         "--ignore",
-        "E402"
+        "E402",
+        "--max-line-length",
+        "120",
     ],
     "editor.fontSize": 16,
     "editor.formatOnSave": true,
@@ -30,8 +32,8 @@
         "--disable=C0114,C0115,C0116",
         "--generated-members=numpy.*, torch.*, cairo"
     ],
-    "python.analysis.typeCheckingMode": "off",
     "python.languageServer": "Pylance",
+    "python.analysis.": false,
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "terminal.integrated.inheritEnv": false,
     "window.menuBarVisibility": "toggle",
@@ -42,10 +44,6 @@
     "gitlens.codeLens.enabled": false,
     "gitlens.hovers.enabled": false,
     "explorer.confirmDragAndDrop": false,
-    "jupyter.widgetScriptSources": [
-        "jsdelivr.com",
-        "unpkg.com"
-    ],
     "gitlens.gitCommands.skipConfirmations": [
         "fetch:command",
         "stash-push:command",
@@ -56,5 +54,15 @@
         "editor.indentSize": 4,
         "editor.insertSpaces": true
     },
-    "cmake.showOptionsMovedNotification": false
+    "notebook.lineNumbers": "on",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": false
+    },
+    "continue.enableTabAutocomplete": false,
+    "python.createEnvironment.trigger": "off",
+    "python-envs.defaultEnvManager": "ms-python.python:conda"
 }
