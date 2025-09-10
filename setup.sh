@@ -89,7 +89,7 @@ fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -qO- https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh | less
+  wget -qO- https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh | bash
   stow conda
 fi
 
