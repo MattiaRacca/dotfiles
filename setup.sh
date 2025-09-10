@@ -4,7 +4,7 @@
 
 echo -e "\n===== Fresh installation =====\n"
 sudo apt update
-sudo apt install stow
+sudo apt install stow curl tree htop openssh-server screen
 
 echo -e "\n===== Basic stuff =====\n"
 
@@ -13,11 +13,6 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   rm ~/.bashrc
   rm ~/.bash_logout
   stow bash
-fi
-
-read -p 'Do you want curl/tree/htop/ssh/screen? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install curl tree htop openssh-server screen
 fi
 
 read -p 'Do you want vim? [y/n]: ' answer
@@ -53,6 +48,25 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   bash ~/.dropbox-dist/dropboxd
 fi
 
+echo -e "===== SSH =====\n"
+
+read -p 'stow ssh? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  stow ssh
+fi
+
+read -p 'create SSH key for work? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  ssh-keygen -t ed25519 -C "mattia.racca@naverlabs.com" -f ~/.ssh/naver_ed25519
+  ssh-add ~/.ssh/naver_ed25519
+fi
+
+read -p 'create SSH key for personal gmail? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  ssh-keygen -t ed25519 -C "mattia.rh@gmail.com" -f ~/.ssh/gmail_ed25519
+  ssh-add ~/.ssh/gmail_ed25519
+fi
+
 echo -e "===== GIT account setup =====\n"
 
 read -p 'Do you want git account? [y/n]: ' answer
@@ -69,17 +83,19 @@ echo -e "\n===== Work related stuff =====\n"
 
 read -p 'Do you want Visual Studio Code? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-  sudo apt install ~/Downloads/code.deb
-  rm ~/Downloads/code.deb
+  wget -O /tmp/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+  sudo apt install /tmp/code.deb
 fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  bash ~/Downloads/conda.sh
+  wget -qO- /tmp/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh | bash
   stow conda
-  rm ~/Downloads/conda.sh
+else
+  read -p 'Do you want mamba instead? [y/n]: ' mamba
+  if [ "$mamba" = "y" -o -z "$mamba" ];then
+    wget -qO- /tmp/mamba.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" | bash
+    # stow mamba
 fi
 
 read -p 'Do you want Cookiecutter? [y/n]: ' answer
@@ -87,11 +103,10 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sudo apt install cookiecutter
 fi
 
-read -p 'Do you want ROS2 Humble? [y/n]: ' foxy
-if [ "$foxy" = "y" -o -z "$foxy" ];then
+read -p 'Do you want ROS2 Humble? [y/n]: ' humble
+if [ "$humble" = "y" -o -z "$humble" ];then
   sudo apt install software-properties-common
   sudo add-apt-repository universe
-  sudo apt update && sudo apt install curl
   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
   sudo apt update
@@ -112,8 +127,8 @@ fi
 read -p 'Do you want Docker? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
 	# Add Docker's official GPG key:
-	sudo apt-get update
-	sudo apt-get install ca-certificates curl
+	sudo apt update
+	sudo apt install ca-certificates
 	sudo install -m 0755 -d /etc/apt/keyrings
 	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 	sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -123,16 +138,15 @@ if [ "$answer" = "y" -o -z "$answer" ];then
 	  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
 	  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 	  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-	sudo apt-get update
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo apt update
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
         sudo usermod -aG docker $USER
 fi
 
 read -p 'Do you want Zoom? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
-  sudo apt -f install ~/Downloads/zoom.deb
-  rm ~/Downloads/zoom.deb
+  wget -O /tmp/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
+  sudo apt -f install /tmp/zoom.deb
   (crontab -l ; echo "@reboot nohup setsid zoom")| crontab -
 fi
 
