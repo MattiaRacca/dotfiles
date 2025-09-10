@@ -89,13 +89,8 @@ fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -qO- /tmp/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh | bash
+  wget -qO- /tmp/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh | bash
   stow conda
-else
-  read -p 'Do you want mamba instead? [y/n]: ' mamba
-  if [ "$mamba" = "y" -o -z "$mamba" ];then
-    wget -qO- /tmp/mamba.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" | bash
-    # stow mamba
 fi
 
 read -p 'Do you want Cookiecutter? [y/n]: ' answer
