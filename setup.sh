@@ -57,8 +57,8 @@ fi
 
 read -p 'create SSH key for work? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  ssh-keygen -t ed25519 -C "mattia.racca@naverlabs.com" -f ~/.ssh/naver_ed25519
-  ssh-add ~/.ssh/naver_ed25519
+  ssh-keygen -t ed25519 -C "mattia.racca@naverlabs.com" -f ~/.ssh/naverid_ed25519
+  ssh-add ~/.ssh/naverid_ed25519
 fi
 
 read -p 'create SSH key for personal gmail? [y/n]: ' answer
