@@ -1,10 +1,10 @@
 #!/bin/bash
-# A simple install script for Ubuntu 22.04
+# A simple install script for Ubuntu 24.04
 # Mattia Racca
 
 echo -e "\n===== Fresh installation =====\n"
 sudo apt update
-sudo apt install stow curl tree htop openssh-server screen
+sudo apt install stow curl tree htop openssh-server screen net-tools
 
 echo -e "\n===== Basic stuff =====\n"
 
@@ -61,12 +61,6 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   ssh-add ~/.ssh/naverid_ed25519
 fi
 
-read -p 'create SSH key for personal gmail? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  ssh-keygen -t ed25519 -C "mattia.rh@gmail.com" -f ~/.ssh/gmail_ed25519
-  ssh-add ~/.ssh/gmail_ed25519
-fi
-
 echo -e "===== GIT account setup =====\n"
 
 read -p 'Do you want git account? [y/n]: ' answer
@@ -89,7 +83,8 @@ fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -qO- https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh | bash
+  wget -O /tmp/miniconda.sh  https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh
+  bash /tmp/miniconda.sh
   stow conda
 fi
 
@@ -166,4 +161,10 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   sudo add-apt-repository ppa:inkscape.dev/stable
   sudo apt update
   sudo apt install inkscape
+fi
+
+echo -e "===== Rice  =====\n"
+read -p 'Do you want your usual profile pic? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  stow face
 fi
