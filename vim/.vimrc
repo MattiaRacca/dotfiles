@@ -97,6 +97,11 @@ let g:lightline = {
 colorscheme wombat
 
 "------------------------------------------------------------
+inoremap <C-v> <ESC> "+pa
+vnoremap <C-c> "+y
+vnoremap <C-d> "+d
+
+"------------------------------------------------------------
 " Autopep8 on F8
 let g:autopep8_disable_show_diff=1
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
