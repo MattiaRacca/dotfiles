@@ -17,6 +17,17 @@ function mycommands() {
   done
 }
 
+# Recursively run git status on all git repos under current directory
+gst() {
+  local depth="${1:-2}"
+
+  # Find directories up to given depth containing a .git folder
+  while IFS= read -r repo; do
+    echo -e "\n\033[1;34m=== $(basename "$repo") ===\033[0m"
+    (cd "$repo" && git status -s)
+  done < <(find . -maxdepth "$depth" -type d -name ".git" -prune | sed 's|/.git||')
+}
+
 ## Add conda kernel to jupyter, while conda kernel is active
 function addjupyterkernel() {
   pip install ipykernel
