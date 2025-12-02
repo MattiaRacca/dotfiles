@@ -20,6 +20,9 @@ rosup () {
     export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$HOME/elevator_ws/install/elevator_sim/share/elevator_sim/resource/models:$HOME/elevator_ws/install/around_description/share
 }
 
+alias fmnavdata='sshfs mracca@chaos-06:/beegfs/scratch/data/habitat /home/mracca/Projects/fm-nav-habitat/data'
+alias fmnavout='sshfs mracca@chaosfromhome:/beegfs/scratch/user/mracca/fm-nav/out /home/mracca/Projects/fm-nav-habitat/out'
+
 ## SSHFS into NLE machines
 easymounts() {
     # Define default variables
@@ -27,12 +30,11 @@ easymounts() {
     remote_host=""
     remote_dir=""
     local_mount_point=""
-    
     # Parse the mount name and other options
     mount_name=""
     from_home_flag=0
     mount_points_folder="~/Mounts"
-    available_mounts=("siple" "d005sarn" "huge" "homepi")
+    available_mounts=("siple" "d005sarn" "huge" "homepi" "scratch")
 
     while [[ "$1" != "" ]]; do
         case $1 in
@@ -93,6 +95,12 @@ easymounts() {
             remote_dir="/home/pi/Sharedrive"
             local_mount_point="/raspberrypi_sharedrive"
             ;;
+        scratch )
+            remote_user="mracca"
+            remote_host="chaos-06"
+            remote_dir="/beegfs/scratch/user/mracca"
+            local_mount_point="/scratch"
+            ;;
         * )
             echo "Unknown mount name: $mount_name"
             echo "Available mount names:"
@@ -144,7 +152,6 @@ tensortunnel () {
             shift
         fi
     fi
-    
     tunnel_cmd="ssh -L 16006:127.0.0.1:6006 ${username}@${hostname}"
 
     if [[ $from_home_flag -eq 1 ]]; then
