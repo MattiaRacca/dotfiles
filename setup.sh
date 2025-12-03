@@ -4,7 +4,7 @@
 
 echo -e "\n===== Fresh installation =====\n"
 sudo apt update
-sudo apt install stow curl tree build-essential htop openssh-server screen net-tools sshfs
+sudo apt install stow curl tree htop openssh-server screen net-tools sshfs
 
 echo -e "\n===== Basic stuff =====\n"
 
@@ -162,6 +162,21 @@ read -p 'Do you want your usual profile pic? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   stow face
 fi
+
+read -p 'Do you want your usual folders? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  mkdir ~/Documents/Zotero
+  mkdir ~/Documents/Miscellanea
+  mkdir ~/Documents/Papers
+  mkdir ~/Documents/Courses
+  mkdir ~/Documents/Trips
+  mkdir ~/Projects
+fi
+
+echo -e "===== Final Cleanup =====\n"
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
 
 # echo -e "===== Obsolete =====\n"
 # read -p 'Do you want grub-customizer? [y/n]: ' answer
