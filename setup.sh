@@ -21,6 +21,12 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   stow vim
 fi
 
+read -p 'Do you want to track the crontab? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  (crontab -l ; echo "0 12 * * 1-5 /bin/bash -lc 'crontab -l > $HOME/dotfiles/crontabs/$(hostname)'
+")| crontab -
+fi
+
 echo -e "===== GNOME stuff setup =====\n"
 
 read -p 'gnome terminal settings? [y/n]: ' answer
@@ -34,7 +40,8 @@ read -p 'Do you want Dropbox? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   (crontab -l ; echo "@reboot ~/.dropbox-dist/dropboxd")| crontab -
-  bash ~/.dropbox-dist/dropboxd
+  bash ~/.dropbox-dist/dropboxd &
+  echo "Dropbox should be working at the next reboot"
 fi
 
 echo -e "===== SSH =====\n"
