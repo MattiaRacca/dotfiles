@@ -9,6 +9,8 @@ declare -A MY_COMMANDS=(
   [tensortunnel]="SSH tunnel for tensorboard from NLE laptop"
 )
 
+alias cel='conda env list'
+
 function mycommands() {
   openformat="\033[1;32m"
   closeformat="\033[0m"

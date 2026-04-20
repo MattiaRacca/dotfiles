@@ -3,26 +3,6 @@
 ## NLE Docker Repo
 export NLEREPO=docker.int.europe.naverlabs.com:5000
 
-## ROS2
-rosup () {
-    source /opt/ros/humble/setup.bash
-    export ROS_DOMAIN_ID=55
-
-    # for colcon_cd
-    source /usr/share/colcon_cd/function/colcon_cd.sh
-    export _colcon_cd_root=/opt/ros/$ROS_DISTRO/
-    #export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-    # for colcon autocompletion
-    source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-
-    # GAZEBO
-    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$HOME/elevator_ws/install/elevator_sim/share/elevator_sim/resource/models:$HOME/elevator_ws/install/around_description/share
-}
-
-alias fmnavdata='sshfs mracca@chaos-06:/beegfs/scratch/data/habitat /home/mracca/Projects/fm-nav-habitat/data'
-alias fmnavout='sshfs mracca@chaosfromhome:/beegfs/scratch/user/mracca/fm-nav/out /home/mracca/Projects/fm-nav-habitat/out'
-
 ## SSHFS into NLE machines
 easymounts() {
     # Define default variables
@@ -34,7 +14,7 @@ easymounts() {
     mount_name=""
     from_home_flag=0
     mount_points_folder="~/Mounts"
-    available_mounts=("siple" "d005sarn" "huge" "homepi" "scratch")
+    available_mounts=("siple" "d005sarn" "huge" "homepi" "scratch" "fmnavdata" "fmnavout" "fmnavbtout" "crowdnavout")
 
     while [[ "$1" != "" ]]; do
         case $1 in
@@ -101,19 +81,49 @@ easymounts() {
             remote_dir="/beegfs/scratch/user/mracca"
             local_mount_point="/scratch"
             ;;
+        fmnavdata )
+            remote_user="mracca"
+            remote_host="chaos-06"
+            remote_dir="/beegfs/scratch/data/habitat"
+            local_mount_point="/home/mracca/Projects/fm-nav-habitat/data"
+            mount_points_folder=""
+            ;;
+        fmnavout )
+            remote_user="mracca"
+            remote_host="chaos-06"
+            remote_dir="/beegfs/scratch/user/mracca/fm-nav/out"
+            local_mount_point="/home/mracca/Projects/fm-nav-habitat/out"
+            mount_points_folder=""
+            ;;
+        fmnavbtout )
+            remote_user="mracca"
+            remote_host="chaos-06"
+            remote_dir="/beegfs/scratch/user/mracca/fm-nav__bt/out"
+            local_mount_point="/home/mracca/Projects/fm-nav-habitat/out"
+            mount_points_folder=""
+            ;;
+        crowdnavout )
+            remote_user="mracca"
+            remote_host="chaos-06"
+            remote_dir="/beegfs/scratch/user/mracca/crowd-nav/out"
+            local_mount_point="/home/mracca/Projects/crowd-nav__v2/out"
+            mount_points_folder=""
+            ;;
         * )
             echo "Unknown mount name: $mount_name"
+            echo "-r for remote via VPN"
             echo "Available mount names:"
             for mount in "${available_mounts[@]}"; do
                 echo "  - $mount"
             done
+            echo "Otherwise: sshfs <user>@<host>:<remote_dir> <local_mount_point>"
             return 1
             ;;
     esac
 
     # Build the SSHFS command
     sshfs_cmd="sshfs ${remote_user}@${remote_host}:${remote_dir} ${mount_points_folder}${local_mount_point}"
-    sshfs_extra_jump="-o ssh_command='ssh -J wood'"
+    sshfs_extra_jump="-o ssh_command='ssh -J frontend-1'"
 
     # Append reconnect option if -r is passed
     if [[ $from_home_flag -eq 1 ]]; then
