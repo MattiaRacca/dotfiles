@@ -34,6 +34,14 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   dconf load /org/gnome/terminal/legacy/profiles:/ < ~/dotfiles/gnome-terminal/ukiyoe.dconf
 fi
 
+read -p 'UbuntuSans Mono Nerd Font? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  mkdir -p ~/.local/share/fonts
+  wget -O /tmp/ubuntumononerd.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuSans.zip
+  unzip /tmp/ubuntumononerd.zip -d ~/.local/share/fonts
+  fc-cache -fv
+fi
+
 echo -e "===== Personal tools =====\n"
 
 read -p 'Do you want Dropbox? [y/n]: ' answer
