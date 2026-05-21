@@ -1,0 +1,3 @@
+[submodule "submodules/slurm-tools"]
+	path = submodules/slurm-tools
+	url = git@es.naverlabs.com:guillaume-bono/slurm-tools.git
