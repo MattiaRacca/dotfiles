@@ -3,6 +3,9 @@
 ## NLE Docker Repo
 export NLEREPO=docker.int.europe.naverlabs.com:5000
 
+## ROS2
+export ROS_DISTRO=jazzy
+
 ## SSHFS into NLE machines
 easymounts() {
     # Define default variables
@@ -133,43 +136,6 @@ easymounts() {
     # Execute the SSHFS command
     echo "Executing: $sshfs_cmd"
     eval "$sshfs_cmd"
-}
-
-## SSH tunnels for Tensorboard on NLE machines
-tensortunnel () {
-    hostname=""
-    username="mracca"
-    from_home_append="fromhome"
-    from_home_flag=0
-
-    # Check if the first argument is the -r flag
-    if [ "$1" == "-r" ]; then
-        from_home_flag=1
-        shift
-        # Now check for the required string (which is the next argument)
-        if [ -z "$1" ]; then
-            echo "Error: hostname must be specified."
-            return 1
-        else
-            hostname="$1"
-        fi
-    else
-        hostname="$1"
-        shift
-        # Now check for the required string (which is the next argument)
-        if [ "$1" == "-r" ]; then
-            from_home_flag=1
-            shift
-        fi
-    fi
-    tunnel_cmd="ssh -L 16006:127.0.0.1:6006 ${username}@${hostname}"
-
-    if [[ $from_home_flag -eq 1 ]]; then
-        tunnel_cmd=${tunnel_cmd}${from_home_append}
-    fi
-    echo "Running $tunnel_cmd"
-    echo "Afterwards you should run tensorboard --logdir=/path/to/logs"
-    eval "$tunnel_cmd"
 }
 
 ## CONDA
