@@ -3,6 +3,10 @@ source /etc/proxyrc
 cyan="\[\e[1;93m\]"
 export PS1="$cyan\u@CHAOS-06$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
 
+full_hostname="chaos-06.int.europe.naverlabs.com"
+alias sls='/usr/bin/PYTHON314 ~/dotfiles/submodules/slurm-tools/status.py'
+alias tb='tensorboard serve --logdir out/ppo/ --port=0 --host=$full_hostname'
+
 ## CONDA
 # >>> conda initialize >>>
 __conda_setup="$('/home/$USER/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
