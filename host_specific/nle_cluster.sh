@@ -1,11 +1,14 @@
 source /etc/proxyrc
 
 yellow="\[\e[1;93m\]"
-export PS1="$yellow\u@$HOSTNAME$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
+export PS1="$yellow\u@\h$green\$(__git_ps1)$greenbold\$(__conda_ps1) $blue\W $reset"
 
-full_hostname="$HOSTNAME.int.europe.naverlabs.com"
 alias sls='/usr/bin/PYTHON314 /home/$USER/dotfiles/submodules/slurm-tools/status.py'
-alias tb='tensorboard serve --logdir out/ppo/ --port=0 --host=$full_hostname'
+tb() {
+    conda activate tb
+    tensorboard serve --port=0 --host=$FULL_HOSTNAME "$@"
+    conda deactivate
+}
 
 ## CONDA
 # >>> conda initialize >>>
