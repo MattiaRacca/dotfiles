@@ -1,0 +1,11 @@
+% conda, env
+# Activate conda env
+conda activate <existing_env_name>
+
+# Clone a new environment from existing one
+conda create -n <new_env_name> --clone <existing_env_name>
+
+# Remove a conda environment
+conda env remove --name <existing_env_name>
+
+$ existing_env_name: conda env list | awk '!/^#/ && $1!="" {print $1}'

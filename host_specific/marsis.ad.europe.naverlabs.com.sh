@@ -6,7 +6,19 @@ export NLEREPO=docker.int.europe.naverlabs.com:5000
 ## ROS2
 export ROS_DISTRO=jazzy
 
-## SSHFS into NLE machines
+## Tuxedo (on trial)
+export TODO_DIR="$HOME/.tuxedo"
+
+### Tuxedo (on trial)
+function tux() { ~/.cargo/bin/tuxedo "$@"; }
+
+## Navi (on trial)
+export PATH="${PATH}:~/.cargo/bin"
+export NAVI_PATH="~/dotfiles/cheats"
+source <(navi widget bash)
+
+
+## Easy SSHFS into machines
 easymounts() {
     # Define default variables
     remote_user=""
@@ -15,18 +27,14 @@ easymounts() {
     local_mount_point=""
     # Parse the mount name and other options
     mount_name=""
-    from_home_flag=0
     mount_points_folder="~/Mounts"
-    available_mounts=("siple" "d005sarn" "huge" "homepi" "scratch" "fmnavdata" "fmnavout" "fmnavbtout" "crowdnavout")
+    available_mounts=("homepi" "scratch" "fmnavdata" "fmnavout")
 
     while [[ "$1" != "" ]]; do
         case $1 in
             -m| --mount)
                 shift
                 mount_name=$1
-                ;;
-            -r| --remote)
-                from_home_flag=1
                 ;;
             -a| --available )
                 echo "Available mount names:"
@@ -44,7 +52,7 @@ easymounts() {
     done
 
     if [[ -z "$mount_name" ]]; then
-        echo "No mount specified. Please specify a mount name with --mount"
+        echo "No mount specified. Please specify a mount name with -m"
         echo "Available mount names:"
         for mount in "${available_mounts[@]}"; do
             echo "  - $mount"
@@ -54,24 +62,6 @@ easymounts() {
 
     # Set variables based on the mount_name
     case $mount_name in
-        siple )
-            remote_user="mracca"
-            remote_host="siple"
-            remote_dir="/home/mracca/Projects/DynamicWaitingPose"
-            local_mount_point="/dwp_on_siple"
-            ;;
-        d005sarn )
-            remote_user="around"
-            remote_host="d005"
-            remote_dir="/home/around/sarn_temp"
-            local_mount_point="/sarn_temp"
-            ;;
-        huge )
-            remote_user="mracca"
-            remote_host="huge"
-            remote_dir="/home/mracca/Projects/DynamicWaitingPose"
-            local_mount_point="/dwp_on_huge"
-            ;;
         homepi )
             remote_user="pi"
             remote_host="192.168.1.194"
@@ -95,26 +85,10 @@ easymounts() {
             remote_user="mracca"
             remote_host="chaos-06"
             remote_dir="/beegfs/scratch/user/mracca/fm-nav/out"
-            local_mount_point="/home/mracca/Projects/fm-nav-habitat/out"
-            mount_points_folder=""
-            ;;
-        fmnavbtout )
-            remote_user="mracca"
-            remote_host="chaos-06"
-            remote_dir="/beegfs/scratch/user/mracca/fm-nav__bt/out"
-            local_mount_point="/home/mracca/Projects/fm-nav-habitat/out"
-            mount_points_folder=""
-            ;;
-        crowdnavout )
-            remote_user="mracca"
-            remote_host="chaos-06"
-            remote_dir="/beegfs/scratch/user/mracca/crowd-nav/out"
-            local_mount_point="/home/mracca/Projects/crowd-nav__v2/out"
-            mount_points_folder=""
+            local_mount_point="/fm-nav-out"
             ;;
         * )
             echo "Unknown mount name: $mount_name"
-            echo "-r for remote via VPN"
             echo "Available mount names:"
             for mount in "${available_mounts[@]}"; do
                 echo "  - $mount"
@@ -126,17 +100,13 @@ easymounts() {
 
     # Build the SSHFS command
     sshfs_cmd="sshfs ${remote_user}@${remote_host}:${remote_dir} ${mount_points_folder}${local_mount_point}"
-    sshfs_extra_jump="-o ssh_command='ssh -J frontend-1'"
-
-    # Append reconnect option if -r is passed
-    if [[ $from_home_flag -eq 1 ]]; then
-        sshfs_cmd="${sshfs_cmd} ${sshfs_extra_jump}"
-    fi
 
     # Execute the SSHFS command
     echo "Executing: $sshfs_cmd"
     eval "$sshfs_cmd"
 }
+
+export -f easymounts
 
 ## CONDA
 # >>> conda initialize >>>
