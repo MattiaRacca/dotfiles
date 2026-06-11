@@ -1,7 +1,6 @@
 ### Git aliases and functions
 alias workgit='git config --local user.name "mattia-racca" && git config --local user.email "mattia.racca@naverlabs.com" && git config --local --list'
 alias mygit='git config --local user.name "MattiaRacca" && git config --local user.email "mattia.rh@gmail.com" && git config --local --list'
-alias submodule_init='git submodule update --init --recursive'
 gst() {
   # Recursively run git status on all git repos under current directory
   local depth="${1:-2}"
@@ -54,8 +53,9 @@ function duh() {
   done
 }
 
-# dislexia helpers
-alias clera='clear -x'
+# dyslexia helpers
+alias clera=clear
+alias celar=clear
 alias sl='ls'
 alias exot='exit'
 

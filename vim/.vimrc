@@ -81,9 +81,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'sheerun/vim-wombat-scheme'
-" Plug 'arcticicestudio/nord-vim'
-Plug 'mboughaba/i3config.vim'
-Plug 'tell-k/vim-autopep8'
 call plug#end()
 
 "------------------------------------------------------------
@@ -100,11 +97,6 @@ colorscheme wombat
 inoremap <C-v> <ESC> "+pa
 vnoremap <C-c> "+y
 vnoremap <C-d> "+d
-
-"------------------------------------------------------------
-" Autopep8 on F8
-let g:autopep8_disable_show_diff=1
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 "------------------------------------------------------------
 " Flag problematic whitespace (trailing and spaces before tabs)
