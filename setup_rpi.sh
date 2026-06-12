@@ -54,6 +54,15 @@ if [ "$answer" = "y" -o -z "$answer" ];then
 	sudo apt install samba
 fi
 
+read -p 'Do you want miniconda? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  mkdir -p ~/miniconda3
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O ~/miniconda3/miniconda.sh
+  bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  rm ~/miniconda3/miniconda.sh
+  stow conda
+fi
+
 read -p 'Do you want Mopidy? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
 	sudo wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg https://apt.mopidy.com/mopidy.gpg
