@@ -1,10 +1,10 @@
 #!/bin/bash
-# A simple install script for Ubuntu 22.04
+# A simple install script for Ubuntu 24.04
 # Mattia Racca
 
 echo -e "\n===== Fresh installation =====\n"
 sudo apt update
-sudo apt install stow
+sudo apt install stow curl tree htop openssh-server screen net-tools sshfs
 
 echo -e "\n===== Basic stuff =====\n"
 
@@ -15,20 +15,16 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   stow bash
 fi
 
-read -p 'Do you want curl/tree/htop/ssh/screen? [y/n]: ' answer
-if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install curl tree htop openssh-server screen
-fi
-
 read -p 'Do you want vim? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install vim
+  sudo apt install vim vim-gtk3
   stow vim
 fi
 
-read -p 'Do you want grub-customizer? [y/n]: ' answer
+read -p 'Do you want to track the crontab? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  sudo apt install grub-customizer
+  (crontab -l ; echo "0 12 * * 1-5 /bin/bash -lc 'crontab -l > $HOME/dotfiles/crontabs/$(hostname)'
+")| crontab -
 fi
 
 echo -e "===== GNOME stuff setup =====\n"
@@ -38,10 +34,12 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   dconf load /org/gnome/terminal/legacy/profiles:/ < ~/dotfiles/gnome-terminal/ukiyoe.dconf
 fi
 
-read -p 'Gedit settings? [y/n]: ' answer
+read -p 'UbuntuSans Mono Nerd Font? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  dconf load /org/gnome/gedit/ < gedit/gedit.dconf
-  sudo apt install gedit-plugins
+  mkdir -p ~/.local/share/fonts
+  wget -O /tmp/ubuntumononerd.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuSans.zip
+  unzip /tmp/ubuntumononerd.zip -d ~/.local/share/fonts
+  fc-cache -fv
 fi
 
 echo -e "===== Personal tools =====\n"
@@ -50,7 +48,21 @@ read -p 'Do you want Dropbox? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
   cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   (crontab -l ; echo "@reboot ~/.dropbox-dist/dropboxd")| crontab -
-  bash ~/.dropbox-dist/dropboxd
+  bash ~/.dropbox-dist/dropboxd &
+  echo "Dropbox should be working at the next reboot"
+fi
+
+echo -e "===== SSH =====\n"
+
+read -p 'stow ssh? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  stow ssh
+fi
+
+read -p 'create SSH key for work? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  ssh-keygen -t ed25519 -C "mattia.racca@naverlabs.com" -f ~/.ssh/naverid_ed25519
+  ssh-add ~/.ssh/naverid_ed25519
 fi
 
 echo -e "===== GIT account setup =====\n"
@@ -69,24 +81,26 @@ echo -e "\n===== Work related stuff =====\n"
 
 read -p 'Do you want Visual Studio Code? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
-  sudo apt install ~/Downloads/code.deb
-  rm ~/Downloads/code.deb
+  wget -O /tmp/code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+  sudo apt install /tmp/code.deb
 fi
 
 read -p 'Do you want miniconda? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/conda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  bash ~/Downloads/conda.sh
+  wget -O /tmp/miniconda.sh  https://repo.anaconda.com/miniconda/Miniconda3-latest-$(uname)-$(uname -m).sh
+  bash /tmp/miniconda.sh
   stow conda
-  rm ~/Downloads/conda.sh
 fi
 
-read -p 'Do you want ROS2 Humble? [y/n]: ' foxy
-if [ "$foxy" = "y" -o -z "$foxy" ];then
+read -p 'Do you want Cookiecutter? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install cookiecutter
+fi
+
+read -p 'Do you want ROS2 Humble? [y/n]: ' humble
+if [ "$humble" = "y" -o -z "$humble" ];then
   sudo apt install software-properties-common
   sudo add-apt-repository universe
-  sudo apt update && sudo apt install curl
   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
   sudo apt update
@@ -106,28 +120,27 @@ fi
 
 read -p 'Do you want Docker? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-	# Add Docker's official GPG key:
-	sudo apt-get update
-	sudo apt-get install ca-certificates curl
-	sudo install -m 0755 -d /etc/apt/keyrings
-	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-	sudo chmod a+r /etc/apt/keyrings/docker.asc
+# Add Docker's official GPG key:
+  sudo apt update
+  sudo apt install ca-certificates
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-	# Add the repository to Apt sources:
-	echo \
-	  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-	  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-	  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-	sudo apt-get update
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-        sudo usermod -aG docker $USER
+  # Add the repository to Apt sources:
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt update
+  sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  sudo usermod -aG docker $USER
 fi
 
 read -p 'Do you want Zoom? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
-  wget -O ~/Downloads/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
-  sudo apt -f install ~/Downloads/zoom.deb
-  rm ~/Downloads/zoom.deb
+  wget -O /tmp/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
+  sudo apt -f install /tmp/zoom.deb
   (crontab -l ; echo "@reboot nohup setsid zoom")| crontab -
 fi
 
@@ -149,5 +162,44 @@ fi
 
 read -p 'Do you want Inkscape? [y/n]: ' answer
 if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo add-apt-repository ppa:inkscape.dev/stable
+  sudo apt update
   sudo apt install inkscape
 fi
+
+read -p 'Do you want Puddletag? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install puddletag
+fi
+
+echo -e "===== Rice =====\n"
+read -p 'Do you want your usual profile pic? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  stow face
+fi
+
+read -p 'Do you want your usual folders? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  mkdir ~/Documents/Zotero
+  mkdir ~/Documents/Miscellanea
+  mkdir ~/Documents/Papers
+  mkdir ~/Documents/Courses
+  mkdir ~/Documents/Trips
+  mkdir ~/Projects
+fi
+
+echo -e "===== Final Cleanup =====\n"
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
+
+# echo -e "===== Obsolete =====\n"
+# read -p 'Do you want grub-customizer? [y/n]: ' answer
+# if [ "$answer" = "y" -o -z "$answer" ];then
+#   sudo apt install grub-customizer
+# fi
+# read -p 'Gedit settings? [y/n]: ' answer
+# if [ "$answer" = "y" -o -z "$answer" ];then
+#   dconf load /org/gnome/gedit/ < gedit/gedit.dconf
+#   sudo apt install gedit-plugins
+# fi

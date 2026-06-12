@@ -1,0 +1,51 @@
+% git
+$ branch: git branch --all --format='%(refname:short)'
+
+% git, worktree
+@ git
+# Add a new worktree for a branch
+git worktree add <path> <branch>
+
+# Add a new worktree as a sibling dir named repo__branch
+git worktree add "../<repo_name>__<branch>" <branch>
+
+$ repo_name: basename "$PWD"
+
+% git, submodule
+@ git
+# Update all submodules recursively
+git submodule update --recursive
+
+# Initialize and update all submodules recursively
+git submodule update --init --recursive
+
+# Sync the remote URL for a submodule path
+git submodule sync -- <submodule_path>
+
+# Sync the remote URL for all submodule paths
+git submodule sync --recursive
+
+$ submodule_path: git config --file .gitmodules --get-regexp path | awk '{print $2}'
+
+% git, stash
+@ git
+# Push a named stash
+git stash push -m "<stash_name>"
+
+# Pop a stash (select by message)
+git stash pop <stash_ref>
+
+$ stash_ref: git stash list --format='%gd %gs' --- --column 1 --delimiter ' '
+
+% git, rebase
+@ git
+# Rebase a feature branch onto master (transplant commits made since divergence)
+git rebase <branch> <feature>
+
+$ feature: git branch --all --format='%(refname:short)'
+
+% git, push
+@ git
+# Force push safely (after rebase)
+git push --force-with-lease
+

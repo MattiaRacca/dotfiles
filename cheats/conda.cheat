@@ -1,0 +1,25 @@
+% conda, env
+# Activate conda env
+conda activate <existing_env_name>
+
+# Clone a new environment from existing one
+conda create -n <new_env_name> --clone <existing_env_name>
+
+# Create a new environment with a specific python version
+conda create -n <new_env_name> python=<python_version>
+
+$ python_version:
+
+# Remove a conda environment
+conda env remove --name <existing_env_name>
+
+$ existing_env_name: conda env list | awk '!/^#/ && $1!="" {print $1}'
+
+% conda, jupyter
+@ conda, env
+
+# Add Jupyter support to a conda env
+pip install ipykernel && python -m ipykernel install --user --name=<existing_env_name>
+
+# Remove kernel from jupyter
+jupyter kernelspec uninstall <existing_env_name>

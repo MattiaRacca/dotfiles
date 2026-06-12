@@ -1,91 +1,36 @@
-## Add conda kernel to jupyter, while conda kernel is active
-function addjupyterkernel() {
-  pip install ipykernel
-  python -m ipykernel install --user --name=$CONDA_DEFAULT_ENV
+### Git aliases and functions
+alias workgit='git config --local user.name "mattia-racca" && git config --local user.email "mattia.racca@naverlabs.com" && git config --local --list'
+alias mygit='git config --local user.name "MattiaRacca" && git config --local user.email "mattia.rh@gmail.com" && git config --local --list'
+gst() {
+  # Recursively run git status on all git repos under current directory
+  local depth="${1:-2}"
+
+  # Find directories up to given depth containing a .git folder
+  while IFS= read -r repo; do
+    echo -e "\n\033[1;34m=== $(basename "$repo") ===\033[0m"
+    (cd "$repo" && git status -s)
+  done < <(find . -maxdepth "$depth" -type d -name ".git" -prune | sed 's|/.git||')
 }
 
-function removejupyterkernel() {
-  jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
-}
+### Conda aliases and functions
+alias cel='conda env list'
 
-## Work and Personal Github
-function workgit() {
-    git config --local user.name "mattia-racca"
-    git config --local user.email "mattia.racca@naverlabs.com"
-    git config --local --list
-}
+### Python aliases and functions
+alias newpythonproject='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
 
-function mygit() {
-    git config --local user.name "MattiaRacca"
-    git config --local user.email "mattia.rh@gmail.com"
-    git config --local --list
-}
-
-gitgetsubmodules() {
-git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
-    while read path_key local_path
-    do
-        url_key=$(echo $path_key | sed 's/\.path/.url/')
-        url=$(git config -f .gitmodules --get "$url_key")
-        git submodule add $url $local_path
-    done
-}
-
-## .webm to .gif
-webm2gif() {
-  ffmpeg -y -i "$1" -vf palettegen /tmp/palette.png
-  ffmpeg -y -i "$1" -i /tmp/palette.png -filter_complex paletteuse -r 10 "${1%.*}.gif"
-}
-
-## Python: my minimal cookiecutter
-alias mycookiecutter='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'
-
-## miscellanea
+### Miscellanea aliases and functions
 alias mkdir_now='date +%Y%m%d%H%M | xargs mkdir'
 alias :q='echo This is not Vim you silly fool'
 alias :w='echo This is not Vim you silly fool'
 alias :wq='echo This is not Vim you silly fool'
-alias jn='jupyter-notebook'
-alias github='git remote get-url origin | xargs firefox'
 alias re='exec bash'
 alias clear='clear -x'
-alias clera='clear -x'  # dislexia help
-
+function mkcd() { mkdir -p "$@" && cd $_; }
 function psgrep() {
   ps aux | grep $1
 }
-
-# download youtube playlist with yt-dlp
-function downlist() {
-  CURRENT_DIR=$(pwd)
-
-  # Check if the first argument is provided
-  if [ -z "$1" ] || [ -z "$2" ]; then
-    echo "Please provide a folder name and playlist url."
-    exit 1
-  fi
-
-  # Create a new directory in ~/Downloads using the name from $1
-  NEW_DIR="$HOME/Downloads/$1"
-  mkdir -p "$NEW_DIR"
-
-  cd /tmp
-  mkcd "$1"
-
-  yt-dlp -f 140 -x $2
-  for f in *.m4a; do
-    if [ -f "$f" ]; then  # Check if the file exists
-      ffmpeg -i "$f" -codec:v copy -codec:a libmp3lame -q:a 2 "$NEW_DIR/${f%.m4a}.mp3"
-    else
-      echo "No .m4a files found in the directory."
-    fi
-  done
-
-  cd "$CURRENT_DIR"
-}
-
-## disk usage function (current folder only, subfolders and files, color coded)
 function duh() {
+  ## pretty disk usage function
   local dir=${1:-.}
   local blue='\033[0;34m'
   local green='\033[0;32m'
@@ -101,8 +46,15 @@ function duh() {
   done
 }
 
-## ROS "source devel/setup.bash" function that outputs a bunch of useful info
+# dyslexia helpers
+alias clera=clear
+alias celar=clear
+alias sl='ls'
+alias exot='exit'
+
+## ROS aliases and functions
 function devel() {
+  # "source devel/setup.bash" function that outputs a bunch of useful info
   orange='\033[0;33m'
   orangebold='\033[1;33m'
   reset='\033[0m'
@@ -111,14 +63,34 @@ function devel() {
   then
   source install/setup.bash
   echo -e ${orange}DOMAIN_ID=$ROS_DOMAIN_ID
+  echo -e ${orange}RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION
   else
   source devel/setup.bash
   echo -e $orange$ROS_PACKAGE_PATH
   fi
 }
 
-## ROS clean shortcut for ros2 run tf2_tools viewframes
+function rosup () {
+  source /opt/ros/$ROS_DISTRO/setup.bash
+
+  # for colcon_cd
+  source /usr/share/colcon_cd/function/colcon_cd.sh
+  export _colcon_cd_root=/opt/ros/$ROS_DISTRO/
+
+  # for colcon autocompletion
+  source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+
+  # echo to confirm
+  orange='\033[0;33m'
+  orangebold='\033[1;33m'
+  reset='\033[0m'
+  echo -e $orangebold$ROS_DISTRO$reset ACTIVE
+}
+
+alias cbd='colcon build && devel'
+
 function viewtf() {
+  # ros2 run tf2_tools viewframes
   orangebold='\033[1;33m'
   reset='\033[0m'
   if [ -z "$ROS_DISTRO" ]
@@ -130,106 +102,6 @@ function viewtf() {
     evince frames.pdf >/dev/null &
     cd - >/dev/null
   fi
-}
-
-# simple Bluetooth (dis)connect from command line
-bluez () {
-    declare -A list=( [sony]='04:21:44:1E:73:02' [aukey]='FC:58:FA:24:47:47' )
-    pactl load-module module-bluetooth-policy &>/dev/null
-    pactl load-module module-bluetooth-discover &>/dev/null
-
-    found=false
-    for value in sony aukey
-    do
-        if [ "$2" = $value ]; then
-            found=true
-        fi
-    done
-    if [ "$found" = true ]; then
-        echo "Connecting to $2 at  ${list[$2]}..."
-        if [ "$1" = con ] || [ "$1" = c ]; then
-            echo -e "power on" | bluetoothctl
-            sleep 3
-            echo -e "connect ${list[$2]} \n exit" | bluetoothctl
-        elif [ "$1" = dis ] || [ "$1" = d ]; then
-            echo -e "disconnect ${list[$2]} \n power off \n exit" | bluetoothctl
-        else
-            echo "Unknown operation use (c)on or (d)is"
-        fi
-    else
-        echo "Unknown device"
-    fi
-}
-
-## ol' good 'mkdir foo && cd foo'
-function mkcd() { mkdir -p "$@" && cd $_; }
-
-## LaTeX Writing Environment ('cause I despise LaTeX IDEs)
-function we() {
-NAME="root"
-RECURSIVE=false
-FIGURE_FOLDER="figures"
-FIGURE=false
-if [ $DESKTOP_SESSION == "i3" ]; then
-	i3-msg "append_layout ~/.config/i3/latex-workspace.json"
-fi
-for i in "$@"
-do
-case $i in
-  -n=*|--name=*)
-    NAME="${i#*=}"
-    shift # past argument=value
-  ;;
-  -r|--recursive)
-    RECURSIVE=true
-    echo "Recursively opening .tex and .bib"
-    shift # past argument with no value
-  ;;
-  -f|--figures)
-    FIGURE=true
-    echo "Opening .tex in $FIGURE_FOLDER"
-    shift # past argument with no value
-  ;;
-  *)
-    echo "Unknown argument $i"
-    echo "Arguments are -n=main_tex (--name), -r (--recursive), and -f (--figures)"
-    return
-  ;;
-esac
-done
-if [ -e "$NAME.tex" ]; then # if main tex file exists
-  nohup gedit "$NAME".tex &> /dev/null &
-else
-  echo "$NAME.tex not found. Abort"
-  return
-fi
-if ! [ $DESKTOP_SESSION == "i3" ]; then
-	nohup nautilus . &> /dev/null &
-fi
-if [ -e "*.bib" ]; then
-  nohup gedit "*.bib" &> /dev/null &
-else
-  echo "$NAME.bib not found in this folder. Maybe it is in a subfolder?"
-fi
-if [ -e "$NAME.pdf" ]; then # if main pdf already exists
-  nohup evince "$NAME".pdf &> /dev/null &
-fi
-if $RECURSIVE; then # if we want to search for .tex and .bib recursively
-  echo "Recursive search for .tex and .bib files (except figures)"
-  find -name '*.tex' -not -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
-  # + is part of 'find': it tells to execute the exec command only once for multiple finds
-  find -name '*.bib' -exec nohup gedit {} > /dev/null +
-fi
-if $FIGURE; then # want to open .tex figures (tikz)?
-  echo "Recursive search for .tex and .tikz in $FIGURE_FOLDER"
-  find -name '*.tex' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
-  find -name '*.tikz' -path "*/$FIGURE_FOLDER/*" -exec nohup gedit {} > /dev/null +
-fi
-if [ $DESKTOP_SESSION == "i3" ]; then
-  gnome-terminal &
-  sleep 1
-  exit
-fi
 }
 
 # Override the cd builtin to do some nice things
@@ -273,8 +145,8 @@ function cd
 ## conda styling of Command prompt
 __conda_ps1 ()
 {
-        if [ -z "$CONDA_DEFAULT_ENV" ]; then return; fi
-        local conda_env=$(basename $CONDA_DEFAULT_ENV)
-        local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2:].partition(".")[0])')
-        echo " [$conda_env|$python_version]"
+  if [ -z "$CONDA_DEFAULT_ENV" ]; then return; fi
+  local conda_env=$(basename $CONDA_DEFAULT_ENV)
+  local python_version=$(python -c 'import sys; print(sys.version[0]+"."+sys.version[2:].partition(".")[0])')
+  echo " [$conda_env|$python_version]"
 }

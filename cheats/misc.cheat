@@ -1,0 +1,25 @@
+% ffmpeg
+# From .png to mp4 with ffmpeg
+ffmpeg -f image2 -r <rate> -pattern_type glob -i <glob_pattern> -c:v libx264 -preset veryfast -pix_fmt yuv420p -vf scale=1280:-2 -crf 24 <outfile>
+
+$ rate: echo -e '30\n24\n60\n15'
+$ glob_pattern: ls *.png 2>/dev/null | sed 's/[0-9]\+/*/' | sort -u
+$ outfile: base=$(echo '<glob_pattern>' | sed 's/\*//g; s/\.[^.]*$//; s/[._-]*$//'); echo -e "${base}.mp4\nout.mp4"
+
+
+% sshfs, mounts
+# SSHFS-mount I usually need
+easymounts -m <mount_name>
+
+$ mount_name: easymounts -a | sed -n 's/^  - //p'
+
+% tar
+# Compress tar.gz
+tar -czf <archive_name>.tar.gz <target>
+
+$ target: ls
+
+# Uncompress tar.gz
+tar -xzf <archive> -C <destination>
+
+$ archive: ls | grep -E '\.tar|\.tgz'

@@ -1,0 +1,68 @@
+% search, files, find
+
+# Find files by name (case-insensitive, glob) under a dir
+find <dir> -type f -iname '<name_glob>'
+
+# Find files by extension under a dir
+find <dir> -type f -name '*.<ext>'
+
+# Find directories by name
+find <dir> -type d -iname '<name_glob>'
+
+# Find files modified in the last N days
+find <dir> -type f -mtime -<days>
+
+# Find files larger than a size (e.g. 100M, 1G)
+find <dir> -type f -size +<size>
+
+# Find empty files and directories
+find <dir> -empty
+
+# Find files and run a command on each ({} = the file)
+find <dir> -type f -iname '<name_glob>' -exec <cmd> {} \;
+
+$ dir: { ls -l | grep '^d' | awk '{print $10}'; echo -e '.\n~'; }
+$ name_glob: echo -e '\n*.md*.sh\n*.py\nREADME*'
+$ ext: echo -e 'py\ntxt\nmd\njson\ncsv'
+$ days: echo -e '1\n7\n30'
+$ size: echo -e '10M\n100M\n1G'
+$ cmd:
+
+% search, content, ripgrep
+
+# Search file contents recursively for a pattern
+rg '<pattern>' <dir>
+
+# Search only files of a given type (rg --type-list to see types)
+rg --type <rg_type> '<pattern>' <dir>
+
+# Case-insensitive content search
+rg -i '<pattern>' <dir>
+
+# Show only the names of files that contain a match
+rg -l '<pattern>' <dir>
+
+# Search with N lines of context around each match
+rg -C <ctx> '<pattern>' <dir>
+
+# Search including hidden files and ignoring .gitignore
+rg -uu '<pattern>' <dir>
+
+$ dir: echo -e '.\n~\n/'
+$ pattern:
+$ rg_type: rg --type-list | awk -F: '{print $1}'
+$ ctx: echo -e '2\n3\n5'
+
+% search, interactive, fzf
+
+# Fuzzy-find a file by name and print its path
+find <dir> -type f | fzf
+
+# Fuzzy-pick a file, then open it in $EDITOR
+$EDITOR "$(find <dir> -type f | fzf)"
+
+# Live content search: pick a matching line with ripgrep + fzf
+rg --line-number '<pattern>' <dir> | fzf
+
+$ dir: echo -e '.\n~'
+$ pattern: echo ''
