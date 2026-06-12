@@ -14,13 +14,6 @@ gst() {
 
 ### Conda aliases and functions
 alias cel='conda env list'
-addjupyterkernel() {
-  pip install ipykernel
-  python -m ipykernel install --user --name=$CONDA_DEFAULT_ENV
-}
-removejupyterkernel() {
-  jupyter kernelspec uninstall $CONDA_DEFAULT_ENV
-}
 
 ### Python aliases and functions
 alias newpythonproject='cookiecutter gh:mattiaracca/python-minimal-cookiecutter'

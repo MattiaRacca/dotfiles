@@ -12,3 +12,14 @@ $ outfile: base=$(echo '<glob_pattern>' | sed 's/\*//g; s/\.[^.]*$//; s/[._-]*$/
 easymounts -m <mount_name>
 
 $ mount_name: easymounts -a | sed -n 's/^  - //p'
+
+% tar
+# Compress tar.gz
+tar -czf <archive_name>.tar.gz <target>
+
+$ target: ls
+
+# Uncompress tar.gz
+tar -xzf <archive> -C <destination>
+
+$ archive: ls | grep -E '\.tar|\.tgz'
