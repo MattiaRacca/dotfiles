@@ -70,3 +70,12 @@ if [ "$answer" = "y" -o -z "$answer" ];then
 	sudo apt update
 	sudo apt install mopidy mopidy-mpd mopidy-local
 fi
+
+read -p 'Do you want Maestral (Dropbox client for RPI)? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  echo 'https://maestral.app/docs/installation'
+  docker pull maestraldbx/maestral
+  mkdir -p ~/.dropbox
+  docker run --name maestral --dns 8.8.8.8 -v ~/.dropbox:/dropbox   maestraldbx/maestral:latest
+  # after setup (meastral start inside the docker), do the previous command with --restart unless-stopped
+fi
