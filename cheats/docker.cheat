@@ -1,0 +1,72 @@
+% docker, containers
+
+# run and detach
+docker run -d <image>
+
+# tear down
+docker rm -f <container>
+
+# exec into running docker
+docker exec -it <running> <shell>
+
+# stop and kill
+docker stop <running> && docker kill <running>
+
+# list running containers
+docker ps
+
+# follow logs of a container
+docker logs -f <container>
+
+# show last N lines of logs
+docker logs --tail <lines> <container>
+
+# follow logs with timestamps from the last N lines
+docker logs -f --tail <lines> -t <container>
+
+$ image: docker images --filter dangling=false --format '{{.Repository}}:{{.Tag}}'
+$ container: docker ps -a --format '{{.Names}}'
+$ running: docker ps --format '{{.Names}}'
+$ shell: echo -e 'bash\nsh'
+$ lines: echo -e '50\n100\n500\n1000'
+
+% docker, compose
+
+# compose and detach
+docker compose up -d
+
+# compose down
+docker compose down
+
+% docker, images
+
+# build image from current dir without running it
+docker build -t <tag> .
+
+# build forcing a clean rebuild (ignore cached layers)
+docker build -t <tag> . --no-cache
+
+# build from a specific dockerfile and context
+docker build -t <tag> -f <dockerfile> <context>
+
+# list images
+docker images
+
+# list images sorted by content size (largest first)
+docker images --format '{{.Size}}\t{{.Repository}}:{{.Tag}}' | sort -rh
+
+# tag an image after build
+docker tag <source> <target>
+
+# remove a specific image by tag or id
+docker rmi <image_ref>
+
+# prune dangling images
+docker image prune
+
+$ tag:
+$ dockerfile: echo -e 'Dockerfile\nDockerfile.dev\nDockerfile.prod'
+$ context: echo -e '.'
+$ source: docker images --format '{{.Repository}}:{{.Tag}}\t{{.ID}}' --- --column 1 --delimiter '\t'
+$ target:
+$ image_ref: docker images --format '{{.ID}}\t{{.Repository}}:{{.Tag}}' --- --column 1 --delimiter '\t'

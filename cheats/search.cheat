@@ -7,7 +7,7 @@ find <dir> -type f -iname '<name_glob>'
 find <dir> -type f -name '*.<ext>'
 
 # Find directories by name
-find <dir> -type d -iname '<name_glob>'
+find <dir> -type d -iname '<folder_glob>'
 
 # Find files modified in the last N days
 find <dir> -type f -mtime -<days>
@@ -23,6 +23,7 @@ find <dir> -type f -iname '<name_glob>' -exec <cmd> {} \;
 
 $ dir: { ls -l | grep '^d' | awk '{print $10}'; echo -e '.\n~'; }
 $ name_glob: echo -e '\n*.md*.sh\n*.py\nREADME*'
+$ folder_glob:
 $ ext: echo -e 'py\ntxt\nmd\njson\ncsv'
 $ days: echo -e '1\n7\n30'
 $ size: echo -e '10M\n100M\n1G'
@@ -56,13 +57,10 @@ $ ctx: echo -e '2\n3\n5'
 % search, interactive, fzf
 
 # Fuzzy-find a file by name and print its path
-find <dir> -type f | fzf
+find <dir> -name .git -prune -o -type f -print | fzf
 
 # Fuzzy-pick a file, then open it in $EDITOR
-$EDITOR "$(find <dir> -type f | fzf)"
+$EDITOR "$(find <dir> -name .git -prune -o -type f -print | fzf)"
 
-# Live content search: pick a matching line with ripgrep + fzf
-rg --line-number '<pattern>' <dir> | fzf
-
-$ dir: echo -e '.\n~'
+$ dir: { ls -l | grep '^d' | awk '{print $10}'; echo -e '.\n~'; }
 $ pattern: echo ''

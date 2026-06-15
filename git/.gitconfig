@@ -1,6 +1,8 @@
 [user]
 	name = MattiaRacca
 	email = mattia.rh@gmail.com
+[init]
+	defaultBranch = main
 [alias]
         st = status
         co = checkout
