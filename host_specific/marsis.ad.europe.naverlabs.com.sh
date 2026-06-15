@@ -7,10 +7,8 @@ export NLEREPO=docker.int.europe.naverlabs.com:5000
 export ROS_DISTRO=jazzy
 
 ## Tuxedo (on trial)
-export TODO_DIR="$HOME/.tuxedo"
-
-### Tuxedo (on trial)
-function tux() { ~/.cargo/bin/tuxedo "$@"; }
+export TODO_DIR="$HOME/Dropbox/todo"
+function todo() { ~/.cargo/bin/tuxedo "$@"; }
 
 ## Navi (on trial)
 export PATH="${PATH}:~/.cargo/bin"

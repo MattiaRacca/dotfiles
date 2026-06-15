@@ -1,10 +1,10 @@
 % ffmpeg
 # From .png to mp4 with ffmpeg
-ffmpeg -f image2 -r <rate> -pattern_type glob -i <glob_pattern> -c:v libx264 -preset veryfast -pix_fmt yuv420p -vf scale=1280:-2 -crf 24 <outfile>
+ffmpeg -f image2 -r <rate> -pattern_type glob -i '<glob_pattern>' -c:v libx264 -preset veryfast -pix_fmt yuv420p -vf scale=1280:-2 -crf 24 <outfile>
 
 $ rate: echo -e '30\n24\n60\n15'
-$ glob_pattern: ls *.png 2>/dev/null | sed 's/[0-9]\+/*/' | sort -u
-$ outfile: base=$(echo '<glob_pattern>' | sed 's/\*//g; s/\.[^.]*$//; s/[._-]*$//'); echo -e "${base}.mp4\nout.mp4"
+$ glob_pattern:
+$ outfile: echo 'out.mp4'
 
 
 % sshfs, mounts
@@ -23,3 +23,9 @@ $ target: ls
 tar -xzf <archive> -C <destination>
 
 $ archive: ls | grep -E '\.tar|\.tgz'
+
+% tree
+# Tree up to certain depth
+tree -L <depth>
+
+$ depth: echo -e '2\n3\n'

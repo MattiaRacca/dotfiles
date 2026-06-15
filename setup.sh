@@ -52,6 +52,17 @@ if [ "$answer" = "y" -o -z "$answer" ];then
   echo "Dropbox should be working at the next reboot"
 fi
 
+read -p 'Do you want Tuxedo? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  sudo apt install cargo
+  cargo install -git https://github.com/webstonehq/tuxedo
+fi
+
+read -p 'Do you want Navi? [y/n]: ' answer
+if [ "$answer" = "y" -o -z "$answer" ];then
+  bash <(curl -sL https://raw.githubusercontent.com/denisidoro/navi/master/scripts/install)
+fi
+
 echo -e "===== SSH =====\n"
 
 read -p 'stow ssh? [y/n]: ' answer

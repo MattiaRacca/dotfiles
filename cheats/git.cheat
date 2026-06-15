@@ -11,6 +11,9 @@ git worktree add "../<repo_name>__<branch>" <branch>
 
 $ repo_name: basename "$PWD"
 
+# List all current worktrees
+git worktree list
+
 % git, submodule
 @ git
 # Update all submodules recursively
@@ -48,4 +51,9 @@ $ feature: git branch --all --format='%(refname:short)'
 @ git
 # Force push safely (after rebase)
 git push --force-with-lease
+
+% git, reset
+@ git
+# Revert commit so that its changes are back to be local changes
+git reset HEAD~1
 
