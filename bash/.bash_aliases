@@ -110,21 +110,22 @@ function cd
 	# If no arguments (change to ~)
 	if [[ $# -eq 0 ]]
 	then
-	# Get the current repo
-	local repo="$(git rev-parse --show-toplevel 2>/dev/null)"
-	# If we are in a repo and we are not already in the repo root
-	if [[ -n "$repo" && "$PWD" != "$repo" ]]
-	then
-             # Go to the repo root
-             builtin cd $repo
-         else
-             # Pass through (go to ~)
-             builtin cd "$@"
-         fi
-     else
-         # Pass through (go to the directory specified by the argument(s))
-         builtin cd "$@"
-     fi
+		# Relative path up to the repo root ("" if at root, fails if not in a repo).
+		# Using --show-cdup (relative) instead of comparing absolute paths keeps
+		# this symlink-safe and correct inside git worktrees.
+		local cdup
+		if cdup="$(git rev-parse --show-cdup 2>/dev/null)" && [[ -n "$cdup" ]]
+		then
+			# In a repo and not at the root: go to the repo root
+			builtin cd "$cdup"
+		else
+			# Not in a repo, or already at the root: pass through (go to ~)
+			builtin cd "$@"
+		fi
+	else
+		# Pass through (go to the directory specified by the argument(s))
+		builtin cd "$@"
+	fi
      # If we have successfully changed directory, do more magic
      if [[ $? -eq 0 ]]
      then
