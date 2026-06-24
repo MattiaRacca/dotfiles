@@ -1,6 +1,11 @@
 % git
 $ branch: git branch --all --format='%(refname:short)'
 
+% git, checkout
+@ git
+# Drop local changes
+git checkout .
+
 % git, worktree
 @ git
 # Add a new worktree for a branch
@@ -57,3 +62,16 @@ git push --force-with-lease
 # Revert commit so that its changes are back to be local changes
 git reset HEAD~1
 
+% git, diff
+@git
+# Create .patch from working directory
+git diff > <patch_name>.patch
+
+# Create .patch from staged
+git diff --staged > <patch_name>.patch
+
+# Apply .patch
+git apply <patch>
+
+$ patch_name:
+$ patch: ls -l | grep .patch | awk '{print $10}'

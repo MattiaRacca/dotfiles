@@ -23,3 +23,11 @@ pip install ipykernel && python -m ipykernel install --user --name=<existing_env
 
 # Remove kernel from jupyter
 jupyter kernelspec uninstall <existing_env_name>
+
+% conda, rename
+@ conda, env
+
+# Rename a conda environment
+conda rename -n <existing_env_name> <name>
+
+$ name:

@@ -12,14 +12,20 @@ find <dir> -type d -iname '<folder_glob>'
 # Find files modified in the last N days
 find <dir> -type f -mtime -<days>
 
-# Find files larger than a size (e.g. 100M, 1G)
-find <dir> -type f -size +<size>
+# Find files older than N days (not modified in the last N days)
+find <dir> -type f -mtime +<days>
+
+# Find files larger than a size, showing each file's size (largest first), big
+find <dir> -type f -size +<size> -exec du -h {} + | sort -rh
 
 # Find empty files and directories
 find <dir> -empty
 
 # Find files and run a command on each ({} = the file)
 find <dir> -type f -iname '<name_glob>' -exec <cmd> {} \;
+
+# Find dangling symlinks
+find <dir> -xtype l
 
 $ dir: { ls -l | grep '^d' | awk '{print $10}'; echo -e '.\n~'; }
 $ name_glob: echo -e '\n*.md*.sh\n*.py\nREADME*'
